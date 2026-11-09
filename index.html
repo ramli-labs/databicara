@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DATA BICARA · Modul 3 Informatika & KKA Kelas VIII</title>
+<style>
+:root{--ink:#1A2433;--muted:#5B6575;--teal:#16324F;--teal2:#1D6FA5;--teal3:#2E8BC0;--mint:#E8F1F8;--mint2:#D3E4F1;--amber:#F4B942;--coral:#E4572E;--green:#4C9A6A;--line:#D6E0EA;--bg:#F6F9FC;--r:14px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--teal2)}
+.big{font-size:19px}
+header.top{background:var(--teal);color:#fff;position:sticky;top:0;z-index:20}
+.top .in{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.5px}
+.brand .logo{width:34px;height:34px;border-radius:10px;background:var(--amber);display:grid;place-items:center;color:var(--teal);font-size:18px}
+.brand small{display:block;font-weight:500;letter-spacing:0;opacity:.8;font-size:12px}
+.top .sp{flex:1}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer}
+.chip.warn{background:var(--amber);color:var(--teal);border-color:var(--amber);font-weight:700}
+main{max-width:1080px;margin:0 auto;padding:22px 18px 80px}
+h1{font-size:28px;line-height:1.2;margin:4px 0 8px}
+h2{font-size:21px;margin:26px 0 10px}
+h3{font-size:17px;margin:16px 0 6px}
+.muted{color:var(--muted)}
+.crumb{font-size:14px;color:var(--muted);margin-bottom:6px}
+.crumb a{text-decoration:none}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.hero{background:var(--teal);color:#fff;border-radius:18px;padding:26px;position:relative;overflow:hidden}
+.hero .pq{font-size:20px;font-style:italic;max-width:760px;margin-top:10px}
+.hero .tag{color:var(--amber);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+.pcard{display:block;text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s}
+.pcard:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,61,62,.12)}
+.pnum{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--teal2);color:#fff;font-weight:800;font-size:17px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;background:var(--mint);color:var(--teal)}
+.badge.soon{background:#F1F1F1;color:#777}
+.badge.done{background:#E3F1DD;color:#3D6B2F}
+.badge.grp{background:#FCEBD3;color:#8A5A10}
+.bar{height:8px;background:var(--mint);border-radius:9px;overflow:hidden;margin-top:10px}
+.bar>i{display:block;height:100%;background:var(--teal3)}
+.klist{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.kitem{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:inherit}
+a.kitem:hover{border-color:var(--teal3)}
+.kitem.soon{opacity:.75}
+.kitem .n{width:34px;height:34px;flex:none;border-radius:50%;background:var(--mint);display:grid;place-items:center;font-weight:800;color:var(--teal)}
+.kitem.isdone .n{background:var(--green);color:#fff}
+.kitem .t{flex:1}
+.kitem .t b{display:block}
+.kitem .m{font-size:13px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:11px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--teal2);color:#fff;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{background:#B8C6C5;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--teal2);border:2px solid var(--teal2)}
+.btn.amber{background:var(--amber);color:var(--teal)}
+.btn.sm{padding:6px 12px;font-size:14px;border-radius:9px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.note{background:var(--mint);border-radius:12px;padding:12px 14px;margin:12px 0}
+.note.amber{background:#FDF0DA}
+.note.coral{background:#FBE3DC}
+.note b:first-child{color:var(--teal)}
+label.f{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],input[type=number],input[type=password],input[type=url],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(42,157,143,.25);border-color:var(--teal3)}
+.inst{background:#fff;border-left:0;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0 18px}
+.inst ol{margin:6px 0 0;padding-left:22px}
+.status{margin-top:12px;font-weight:700}
+.status.ok{color:#3D6B2F}.status.q{color:#8A5A10}.status.err{color:var(--coral)}
+.timer{font-variant-numeric:tabular-nums}
+/* sortir */
+.sort{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:820px){.sort{grid-template-columns:1fr}}
+.zone{background:#fff;border:2px dashed var(--line);border-radius:14px;padding:10px;min-height:160px}
+.zone h3{margin:2px 4px 10px;display:flex;justify-content:space-between}
+.zone.a{border-color:var(--teal3)}.zone.p{border-color:#264653}
+.zone.over{background:var(--mint)}
+.kartu{background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 11px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:grab}
+.kartu .jam{font-weight:800;color:var(--coral)}
+.kartu .act{display:flex;gap:6px;margin-top:6px}
+.kartu.ok{border:2px solid var(--green)}.kartu.no{border:2px solid var(--coral)}
+.kartu .fb{font-size:13px;margin-top:6px;color:var(--muted)}
+.mini{font-size:13px;padding:4px 10px;border-radius:8px;border:1.5px solid var(--teal2);background:#fff;color:var(--teal2);font-weight:700;cursor:pointer}
+.mini.p{border-color:#264653;color:#264653}
+/* profil */
+.phone{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;max-width:620px}
+.phead{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.ava{width:52px;height:52px;border-radius:50%;background:var(--amber);display:grid;place-items:center;font-size:26px}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.post{border:0;border-radius:10px;padding:0;overflow:hidden;cursor:pointer;background:#fff;text-align:left;box-shadow:0 0 0 1px var(--line)}
+.post .img{height:86px;display:grid;place-items:center;font-size:38px;color:#fff;position:relative}
+.post .cap{font-size:12.5px;padding:6px 8px;color:var(--ink);min-height:52px}
+.post.cell{box-shadow:0 0 0 3px var(--amber)}
+.post .ck{position:absolute;top:6px;right:8px;background:#fff;color:var(--green);border-radius:50%;width:22px;height:22px;display:none;place-items:center;font-size:14px;font-weight:900}
+.post.filled .ck{display:grid}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:6px 0;cursor:pointer}
+.chk input{margin-top:4px;width:18px;height:18px;flex:none}
+/* tabel */
+table{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--teal);color:#fff;font-weight:700}
+tbody tr:nth-child(even){background:#F8FBFB}
+.tw{overflow-x:auto;border-radius:12px}
+/* audit */
+.aud{display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0}
+.aud .tx{flex:1}
+.aud .alt{font-size:13px;color:#8A5A10;margin-top:3px}
+.tog{display:flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;flex:none}
+.tog button{border:0;background:#fff;padding:7px 14px;font-weight:700;cursor:pointer}
+.tog button.on.y{background:var(--green);color:#fff}.tog button.on.n{background:var(--coral);color:#fff}
+.zonebox{border-radius:14px;padding:16px;color:#fff;font-weight:700}
+.z-h{background:var(--green)}.z-k{background:var(--amber);color:var(--teal)}.z-m{background:var(--coral)}.z-0{background:#B8C6C5}
+.stat{font-size:40px;font-weight:800;line-height:1}
+.choice{display:grid;gap:8px}
+.choice label{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;cursor:pointer}
+.choice label:has(input:checked){border-color:var(--teal3);background:var(--mint)}
+.choice input{margin-top:4px}
+.fbk{margin-top:8px;font-size:14px}
+.right{color:#3D6B2F;font-weight:700}.wrong{color:var(--coral);font-weight:700}
+.tf{display:flex;gap:8px}
+.tf label{border:1.5px solid var(--line);border-radius:9px;padding:6px 14px;cursor:pointer;background:#fff;font-weight:700}
+.tf label:has(input:checked){background:var(--teal2);color:#fff;border-color:var(--teal2)}
+.tf input{position:absolute;opacity:0;pointer-events:none}
+.q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+.pid main{max-width:1400px}.pid body,.pid{font-size:20px}.pid table{font-size:19px}
+.modal{position:fixed;inset:0;background:rgba(15,61,62,.55);display:grid;place-items:center;z-index:50;padding:16px}
+.modal .card{max-width:440px;width:100%}
+footer.ft{text-align:center;color:var(--muted);font-size:13px;padding:20px}
+/* worksheet tiruan */
+.ss{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;user-select:none;font-size:14px}
+.ss-bar{display:flex;gap:6px;padding:8px;background:#F1F5F9;border-bottom:1px solid var(--line)}
+.ss-nb{width:70px;border:1px solid #B9C6D3;background:#fff;border-radius:6px;padding:4px 8px;font-weight:700;cursor:pointer}
+.ss-fx{flex:1;border:1px solid #B9C6D3;background:#fff;border-radius:6px;padding:4px 8px;cursor:pointer;white-space:nowrap;overflow:hidden}
+.ss-fx i{color:#888;font-weight:700;margin-right:6px}
+.ss table{font-size:13.5px;border-radius:0}
+.ss th{background:#E9EEF3;color:#334;text-align:center;cursor:pointer;padding:5px 6px;font-weight:600}
+.ss th.ss-c{cursor:default}
+.ss td{padding:5px 7px;cursor:pointer;white-space:nowrap}
+.ss td.h{font-weight:700;background:#F7FAFC}
+.ss td:hover,.ss th:hover:not(.ss-c),.ss-nb:hover,.ss-fx:hover,.ss-tabs span:hover{outline:2px solid var(--teal3);outline-offset:-2px}
+.ss td.hl{background:#FFF1B8}
+.ss tbody tr:nth-child(even){background:#fff}
+.ss-tabs{display:flex;gap:2px;background:#F1F5F9;border-top:1px solid var(--line);padding:4px 6px 0}
+.ss-tabs span{padding:5px 14px;border-radius:7px 7px 0 0;cursor:pointer;color:#445}
+.ss-tabs span.on{background:#fff;font-weight:700;color:var(--teal2)}
+code{background:var(--mint);border-radius:5px;padding:1px 6px;font-family:Consolas,monospace}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="#"><span class="logo">&#x1F4CA;</span><span>DATA BICARA<small>Modul 3 · Informatika &amp; KKA · Kelas VIII</small></span></a>
+  <span class="sp"></span>
+  <span id="queueChip"></span>
+  <span id="userChip"></span>
+  <a class="chip" href="#guru" style="text-decoration:none">Guru</a>
+</div></header>
+<main id="app"></main>
+<footer class="ft">DATA BICARA · dari cell ke cerita · Ramli Jainal Muttaqin, S.Pd. · SMP Labschool Jakarta</footer>
+<div id="modalRoot"></div>
+
+<script>
+/* ===================== KONFIGURASI ===================== */
+/* Tempel URL Web App Apps Script di sini (lihat README). Kosong = mode coba (jawaban hanya tersimpan di perangkat). */
+const CONFIG = { APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwzg6cQ3K1YSon_WZNMKECQEqp6IhqCjXC1IytiwGv-ICFELLxGhxEFZl55qr4OYGnTPA/exec' };
+
+/* ===================== PENYIMPANAN ===================== */
+const mem = {};
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('databicara.' + k); return v ? JSON.parse(v) : (k in mem ? mem[k] : d); } catch (e) { return k in mem ? mem[k] : d; } },
+  set(k, v) { mem[k] = v; try { localStorage.setItem('databicara.' + k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { delete mem[k]; try { localStorage.removeItem('databicara.' + k); } catch (e) {} },
+  clearPrefix(p) { Object.keys(mem).forEach(k => k.startsWith(p) && delete mem[k]); try { Object.keys(localStorage).forEach(k => k.startsWith('databicara.' + p) && localStorage.removeItem(k)); } catch (e) {} },
+};
+const scriptURL = () => (store.get('guru.url', '') || CONFIG.APPS_SCRIPT_URL || '').trim();
+const rosterOf = kelas => (store.get('roster.' + kelas, null) || {}).data || [];
+async function ambilRoster(kelas, kode) {
+  const url = scriptURL(); if (!url) throw new Error('Web belum tersambung ke Google Sheet');
+  const res = await fetch(url + '?' + new URLSearchParams({ aksi: 'murid', kelas, kode }));
+  const j = await res.json(); if (!j.ok) throw new Error(j.pesan || 'gagal');
+  store.set('roster.' + kelas, { kode, data: j.data }); return j.data;
+}
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+
+/* ===================== DATA MODUL ===================== */
+const PERTEMUAN = [
+  { n: 1, judul: 'Cell, Address & Formula', sub: 'Mengenal worksheet dan Relative & Absolute Reference', tp: 'Informatika BK.8.13–8.14',
+    tujuan: ['Mengenali elemen worksheet dan menunjuk Cell Address serta range dengan tepat.', 'Memprediksi hasil formula yang disalin dengan Relative Reference dan Absolute Reference ($).', 'Menerapkan Relative & Absolute Reference pada data kebiasaan kelas.'],
+    kegiatan: [
+      { id: 'pretest', judul: 'Pre-Test', jenis: 'individu', menit: 5, r: 'pretest', desc: '5 soal singkat sebelum mulai.' },
+      { id: 'peta', judul: 'Peta Worksheet', jenis: 'individu', menit: 10, r: 'peta', desc: '10 tantangan: temukan elemen, cell, dan range di worksheet.' },
+      { id: 'rumus', judul: 'Tebak Formula Disalin', jenis: 'individu', menit: 10, r: 'rumus', desc: 'Apa yang terjadi pada formula ketika disalin? Relative atau Absolute?' },
+      { id: 'misi', judul: 'Misi Data Kelas', jenis: 'kelompok', menit: 30, r: 'misi', desc: 'Olah data kebiasaan 32 murid di Excel/Google Sheets dengan formula.' },
+      { id: 'tanya', judul: 'Pertanyaan untuk Data', jenis: 'kelompok', menit: 5, r: 'tanya', desc: 'Awal proyek: pertanyaan apa yang ingin kalian jawab dengan data?' },
+      { id: 'posttest', judul: 'Post-Test', jenis: 'individu', menit: 8, r: 'posttest', desc: '5 soal pilihan ganda + 1 uraian singkat.' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+      { id: 'survei', judul: 'Tugas Rumah: Survei Kebiasaanku', jenis: 'individu', menit: 0, r: 'survei', desc: 'Catat kebiasaanmu sendiri. Data kelas dipakai di Pertemuan 2 tanpa nama.' },
+    ] },
+  { n: 2, judul: 'Rapikan, Urutkan, Saring', sub: 'Operasi dasar, sorting, dan filtering data kelas', tp: 'Informatika BK.8.15–8.17',
+    tujuan: ['Melakukan operasi dasar worksheet: membuka, menyunting, menyimpan, dan memformat.', 'Mengurutkan data berdasarkan satu atau lebih column.', 'Menyaring data berdasarkan kriteria tertentu.'],
+    kegiatan: [
+      { id: 'rapi', judul: 'Bengkel Data Berantakan', jenis: 'kelompok', desc: 'Merapikan data survei kelas: format angka, judul, dan lebar column.' },
+      { id: 'urut', judul: 'Urutkan & Temukan', jenis: 'kelompok', desc: 'Siapa paling lama tidur? Urutkan satu dan dua column.' },
+      { id: 'saring', judul: 'Saring Kriteria', jenis: 'kelompok', desc: 'Filter: layar > 4 jam, sarapan < 5 hari, dan kombinasinya.' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+    ] },
+  { n: 3, judul: 'Data Menjadi Temuan', sub: 'Fungsi dasar, ringkasan, dan grafik', tp: 'Informatika BK.8.18',
+    tujuan: ['Membuat ringkasan data dengan SUM, AVERAGE, MAX, MIN, dan COUNTIF.', 'Menyusun tiga temuan data sebagai bahan cerita video.'],
+    kegiatan: [
+      { id: 'fungsi', judul: 'Lab Fungsi', jenis: 'kelompok', desc: 'Ringkasan data kelas dengan fungsi dasar.' },
+      { id: 'temuan', judul: '3 Temuan Data', jenis: 'kelompok', desc: 'Angka + makna + saran untuk teman.' },
+      { id: 'brief', judul: 'Brief Video Data', jenis: 'kelompok', desc: 'Tujuan, audiens, pesan kunci, dan pembagian tugas.' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+    ] },
+  { n: 4, judul: 'Suara Data', sub: 'Prinsip produksi audio-video dan narasi', tp: 'KKA LD.8.1–8.2',
+    tujuan: ['Menjelaskan prinsip produksi konten audio dan video yang berkualitas.', 'Merekam dan menyunting narasi audio dari temuan data.'],
+    kegiatan: [
+      { id: 'prinsip', judul: 'Bedah Video Contoh', jenis: 'kelompok', desc: 'Menilai audio, visual, dan pesan dari dua contoh video.' },
+      { id: 'naskah', judul: 'Naskah Narasi', jenis: 'kelompok', desc: 'Naskah 60–90 detik dari 3 temuan data.' },
+      { id: 'audio', judul: 'Checklist Rekam Audio', jenis: 'kelompok', desc: 'Rekam, potong, dan rapikan suara narasi.' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+    ] },
+  { n: 5, judul: 'Video Data', sub: 'Storytelling digital, rekam, dan sunting video', tp: 'KKA LD.8.3–8.5',
+    tujuan: ['Merekam dan menyunting video sederhana.', 'Menerapkan storytelling digital untuk menyajikan data.', 'Memproduksi video edukatif pendek yang informatif dan menarik.'],
+    kegiatan: [
+      { id: 'storyboard', judul: 'Storyboard 6 Panel', jenis: 'kelompok', desc: 'Pembuka–masalah–data–makna–ajakan–penutup.' },
+      { id: 'sunting', judul: 'Checklist Sunting Video', jenis: 'kelompok', desc: 'Grafik, teks, transisi, dan sinkron narasi.' },
+      { id: 'draf', judul: 'Unggah Tautan Draf', jenis: 'kelompok', desc: 'Tautan Google Drive draf video.' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+    ] },
+  { n: 6, judul: 'Tayang & Nilai', sub: 'Evaluasi konten audio-video dan penayangan', tp: 'KKA LD.8.6',
+    tujuan: ['Mengevaluasi kualitas konten audio-video berdasarkan kriteria teknis dan konten.', 'Menayangkan video data kepada warga kelas.'],
+    kegiatan: [
+      { id: 'final', judul: 'Tautan Video Final', jenis: 'kelompok', desc: 'Video data siap tayang.' },
+      { id: 'review', judul: 'Penilaian Antarkelompok', jenis: 'individu', desc: 'Menilai 2 video dengan rubrik teknis dan konten.' },
+      { id: 'refleksi', judul: 'Refleksi Akhir Modul', jenis: 'individu', desc: 'Dari cell ke cerita: apa yang berubah?' },
+      { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
+    ] },
+];
+const KELAS = ['VIII-A', 'VIII-B', 'VIII-C', 'VIII-D', 'VIII-E', 'VIII-F', 'VIII-G'];
+const PROYEK = 'Bagaimana kita mengubah data kebiasaan warga kelas VIII menjadi video pendek yang membuat teman ingin hidup lebih sehat?';
+const FILE_DATA = 'data/Data_Kebiasaan_Kelas_8.xlsx';
+
+/* worksheet tiruan untuk Peta Worksheet */
+const MINI = [['No', 'Nama', 'Tidur', 'Layar', 'Sarapan', 'Layar Seminggu'],
+  [1, 'Alya Putri', 8, 3, 5, 21], [2, 'Bima Saputra', 7.5, 5.5, 5, 38.5], [3, 'Citra Lestari', 8, 3.5, 7, 24.5], [4, 'Dimas Pratama', 8.5, 1, 6, 7],
+  [5, 'Elsa Rahma', 8, 4, 5, 28], [6, 'Fajar Nugroho', 7.5, 4, 7, 28], [7, 'Gita Maharani', 8, 4, 5, 28]];
+const PETA = [
+  { t: 'klik', s: 'Klik <b>Name Box</b> (Name Box), tempat Cell Address dari Active Cell ditampilkan.', k: 'namebox', why: 'Name Box ada di kiri atas, di sebelah Formula Bar.' },
+  { t: 'klik', s: 'Klik <b>Formula Bar</b> (Formula Bar), tempat isi atau formula cell ditampilkan.', k: 'fbar', why: 'Bilah formula ditandai fx, di sebelah kanan Name Box.' },
+  { t: 'klik', s: 'Klik <b>Column Header D</b>.', k: 'col-D', why: 'Column diberi nama dengan huruf, di bagian paling atas.' },
+  { t: 'klik', s: 'Klik <b>Row Header 6</b>.', k: 'row-6', why: 'Row diberi nomor, di bagian paling kiri.' },
+  { t: 'klik', s: 'Klik <b>Sheet Tab "Ringkasan"</b>.', k: 'tab-Ringkasan', why: 'Sheet Tab ada di bagian bawah. Satu file (workbook) bisa berisi banyak worksheet (sheet).' },
+  { t: 'klik', s: 'Klik <b>cell E3</b>.', k: 'cell-E3', why: 'E3 = column E, row 3. Huruf column dulu, baru nomor row.' },
+  { t: 'klik', s: 'Klik cell yang berisi nama <b>Elsa Rahma</b>.', k: 'cell-B6', why: 'Elsa ada di column Nama (B) row 6, jadi alamatnya B6.' },
+  { t: 'ketik', s: 'Ketik Cell Address yang <b>disorot kuning</b>.', hl: 'D4', k: 'D4', why: 'Cell kuning ada di column D row 4.' },
+  { t: 'ketik', s: 'Ketik Cell Address yang berisi <b>Layar Seminggu milik Fajar</b>.', k: 'F7', why: 'Layar Seminggu ada di column F; Fajar di row 7.' },
+  { t: 'range', s: 'Pilih <b>range C2:C8</b>: klik cell awal, lalu klik cell akhir.', k: 'C2:C8', why: 'Range ditulis cell-awal:cell-akhir. C2:C8 = 7 cell nilai Tidur.' },
+];
+const RUMUS = [
+  { f: ['C2', '=A2+B2'], ke: 'C3', o: ['=A2+B2', '=A3+B3', '=B3+C3', '=A3+B2'], a: 1, why: 'Relative Reference ikut bergeser: turun 1 row, maka A2→A3 dan B2→B3.' },
+  { f: ['D2', '=B2*7'], ke: 'D10', o: ['=B10*7', '=B2*7', '=B10*15', '=D10*7'], a: 0, why: 'Turun 8 row: B2→B10. Angka 7 bukan Cell Address, jadi tidak berubah.' },
+  { f: ['C2', '=A2*$F$1'], ke: 'C5', o: ['=A5*$F$4', '=A2*$F$1', '=A5*$F$1', '=A5*F4'], a: 2, why: 'A2 Relative → A5. $F$1 Absolute (dikunci $) → tetap $F$1.' },
+  { f: ['E3', '=B3+C3'], ke: 'F3', o: ['=B3+C3', '=B4+C4', '=C3+D3', '=C4+D4'], a: 2, why: 'Disalin ke kanan 1 column: huruf column bergeser (B→C, C→D), nomor row tetap.' },
+  { f: ['I2', '=C2-M2'], ke: 'I3', o: ['=C3-M2, hasilnya benar', '=C3-M3, hasilnya salah karena M3 bukan target tidur', '=C2-M2, hasilnya sama', 'Error, karena M2 kosong'], a: 1, why: 'Tanpa $, M2 ikut bergeser menjadi M3 (batas layar). Itulah sebabnya target harus dikunci: $M$2.' },
+  { f: ['B5', '=$A5*B$1'], ke: 'C6', o: ['=$A6*C$1', '=$A5*B$1', '=A6*C1', '=$A6*B$1'], a: 0, why: 'Tantangan: Mixed Reference. $A mengunci column A (row boleh bergeser), B$1 mengunci row 1 (column boleh bergeser).' },
+];
+const MISI = [
+  { id: 'm1', judul: 'Misi 1 · Relative Reference', langkah: 'Di <b>H1</b> ketik <i>Layar seminggu</i>. Di <b>H2</b> ketik <code>=D2*7</code>, lalu Fill Down sampai row 33 (tarik Fill Handle di pojok kanan bawah cell, atau klik dua kali Fill Handle).',
+    q: [['m1a', 'Nilai column H untuk murid nomor 7 (row 8)', 28], ['m1b', 'Nilai column H untuk murid nomor 20 (row 21)', 7]] },
+  { id: 'm2', judul: 'Misi 2 · Absolute Reference', langkah: 'Target tidur kelas ada di <b>M2</b>. Di <b>I1</b> ketik <i>Selisih tidur</i>. Di <b>I2</b> ketik <code>=C2-$M$2</code>, lalu Fill Down.',
+    q: [['m2a', 'Nilai column I untuk murid nomor 12', -2], ['m2b', 'Nilai column I untuk murid nomor 25', -1.5]] },
+  { id: 'm3', judul: 'Misi 3 · Buat sendiri', langkah: 'Batas layar ada di <b>M3</b>. Di <b>K1</b> ketik <i>Kelebihan layar</i>. Buat formula di <b>K2</b> yang menghitung Layar dikurangi batas layar, lalu Fill Down.',
+    q: [['m3f', 'Formula yang tampil di cell K10 (salin dari Formula Bar)', '=D10-$M$3'], ['m3v', 'Nilai column K untuk murid nomor 13', 4]] },
+  { id: 'm4', judul: 'Misi 4 · Eksperimen tanpa $', langkah: 'Di <b>J2</b> ketik <code>=C2-M2</code> (tanpa $), lalu Fill Down. Bandingkan column J dengan column I.',
+    q: [['m4v', 'Nilai yang muncul di cell J3', 5.5]] },
+];
+const POST = [
+  { s: 'Cell yang berada di perpotongan column F dan row 12 beralamat…', o: ['12F', 'F12', 'F:12', 'R12C6'], a: 1 },
+  { s: 'Range B2:B33 terdiri atas berapa cell?', o: ['31 cell', '32 cell', '33 cell', '2 cell'], a: 1 },
+  { s: 'Cell D5 berisi <code>=B5*C5</code>. Jika disalin ke D6, formula-nya menjadi…', o: ['=B5*C5', '=B6*C6', '=C5*D5', '=B6*C5'], a: 1 },
+  { s: 'Harga satuan ada di cell H1. Cell E2 berisi <code>=D2*$H$1</code>. Jika disalin ke E9, formula-nya menjadi…', o: ['=D9*$H$8', '=D9*H9', '=D9*$H$1', '=D2*$H$1'], a: 2 },
+  { s: 'Raka menulis <code>=C2-M2</code> di I2 lalu menyalinnya ke bawah. Row 3 dan seterusnya hasilnya salah. Perbaikan yang tepat untuk I2 adalah…', o: ['=C2-M3', '=$C$2-M2', '=C2-$M$2', '=C$2-M2'], a: 2 },
+];
+
+/* ===================== PROFIL & PROGRES ===================== */
+const profil = () => store.get('profil', null);
+const doneKey = (p, k) => `P${p}-${k}`;
+const isDone = (p, k) => !!store.get('done', {})[doneKey(p, k)];
+function markDone(p, k, info) { const d = store.get('done', {}); d[doneKey(p, k)] = info; store.set('done', d); }
+
+function renderChips() {
+  const u = profil();
+  $('#userChip').innerHTML = u ? `<button class="chip" id="chipUser" title="Ganti murid">${esc(u.nama.split(' ')[0])} · ${esc(u.kelas)}/${esc(u.absen)}</button>` : '';
+  const q = store.get('antrean', []);
+  $('#queueChip').innerHTML = q.length ? `<button class="chip warn" id="chipQueue">${q.length} belum terkirim · kirim ulang</button>` : '';
+}
+document.addEventListener('click', e => {
+  if (e.target.id === 'chipUser') confirmBox('Ganti murid?', 'Data identitas dan jawaban yang belum selesai di komputer ini akan dihapus. Jawaban yang sudah terkirim aman.', 'Ya, ganti murid', () => { logout(); });
+  if (e.target.id === 'chipQueue') flushQueue(true);
+});
+function logout() { store.del('profil'); store.del('done'); store.clearPrefix('draft.'); store.clearPrefix('roster.'); location.hash = ''; render(); }
+function confirmBox(title, text, okLabel, onOk) {
+  $('#modalRoot').innerHTML = `<div class="modal"><div class="card"><h3 style="margin-top:0">${esc(title)}</h3><p>${esc(text)}</p><div class="row"><button class="btn" id="mOk">${esc(okLabel)}</button><button class="btn ghost" id="mNo">Batal</button></div></div></div>`;
+  $('#mNo').onclick = () => $('#modalRoot').innerHTML = '';
+  $('#mOk').onclick = () => { $('#modalRoot').innerHTML = ''; onOk(); };
+}
+
+/* ===================== PENGIRIMAN ===================== */
+async function postPayload(p) {
+  const url = scriptURL();
+  if (!url) return 'lokal';
+  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
+  const j = await res.json();
+  if (!j.ok) throw new Error(j.pesan || 'gagal');
+  return 'terkirim';
+}
+async function kirim(pn, kg, data) {
+  const u = profil();
+  const payload = { waktu: new Date().toISOString(), nama: u.nama, kelas: u.kelas, absen: u.absen, kelompok: u.kelompok || '', pertemuan: 'P' + pn, kegiatan: kg.id, judul: kg.judul,
+    skor: data.skor ?? '', maks: data.maks ?? '', ringkasan: data.ringkasan || '', jawaban: JSON.stringify(data.jawaban || {}), kode: u.kode || '' };
+  if (data.anggota && data.anggota.length) payload.anggota = data.anggota;
+  if (data.kelompok) payload.kelompok = data.kelompok;
+  const riwayat = store.get('riwayat', []); riwayat.push(payload); store.set('riwayat', riwayat.slice(-200));
+  let hasil;
+  try { hasil = await postPayload(payload); } catch (e) { const q = store.get('antrean', []); q.push(payload); store.set('antrean', q); hasil = 'antre'; }
+  markDone(pn, kg.id, { skor: payload.skor, maks: payload.maks, waktu: payload.waktu });
+  store.del(`draft.P${pn}-${kg.id}`);
+  renderChips();
+  return hasil;
+}
+async function flushQueue(manual) {
+  let q = store.get('antrean', []); if (!q.length || !scriptURL()) { if (manual && !scriptURL()) alertBox('Belum terhubung', 'Web ini belum disambungkan ke Google Sheet (mode coba). Hubungi guru.'); return; }
+  const sisa = [];
+  for (const p of q) { try { await postPayload(p); } catch (e) { sisa.push(p); } }
+  store.set('antrean', sisa); renderChips();
+  if (manual) alertBox(sisa.length ? 'Masih ada yang gagal' : 'Berhasil', sisa.length ? `${sisa.length} jawaban belum terkirim. Periksa internet lalu coba lagi.` : 'Semua jawaban sudah terkirim ke guru.');
+}
+function alertBox(title, text) { $('#modalRoot').innerHTML = `<div class="modal"><div class="card"><h3 style="margin-top:0">${esc(title)}</h3><p>${esc(text)}</p><button class="btn" id="mOk">Oke</button></div></div>`; $('#mOk').onclick = () => $('#modalRoot').innerHTML = ''; }
+window.addEventListener('online', () => flushQueue(false));
+const statusMsg = h => ({ terkirim: ['ok', 'Terkirim ke guru. Terima kasih!'], antre: ['q', 'Internet bermasalah: jawaban disimpan dan akan dikirim ulang otomatis (atau tekan tombol oranye di atas).'], lokal: ['q', 'Mode coba: web belum disambungkan ke Google Sheet, jawaban hanya tersimpan di perangkat ini.'] }[h]);
+
+/* ===================== DRAF OTOMATIS ===================== */
+function bindDraft(root, key) {
+  const d = store.get('draft.' + key, {});
+  $$('[name]', root).forEach(el => { if (el.dataset.nodraft !== undefined) return; if (d[el.name] !== undefined) { if (el.type === 'checkbox' || el.type === 'radio') el.checked = (d[el.name + '::' + el.value] === true); else el.value = d[el.name]; } });
+  root.addEventListener('input', e => { const el = e.target; if (!el.name || el.dataset.nodraft !== undefined) return; const cur = store.get('draft.' + key, {}); if (el.type === 'checkbox' || el.type === 'radio') { if (el.type === 'radio') $$(`[name="${el.name}"]`, root).forEach(r => cur[r.name + '::' + r.value] = r.checked); else cur[el.name + '::' + el.value] = el.checked; cur[el.name] = 1; } else cur[el.name] = el.value; store.set('draft.' + key, cur); });
+}
+const val = (root, n) => ($(`[name="${n}"]`, root)?.value || '').trim();
+
+/* ===================== HALAMAN ===================== */
+function render() {
+  renderChips();
+  const h = decodeURIComponent(location.hash.slice(1));
+  const app = $('#app');
+  document.documentElement.classList.toggle('pid', h === 'guru' && store.get('guru.pid', false));
+  if (h === 'guru') return viewGuru(app);
+  if (!profil()) return viewProfil(app);
+  let m;
+  if ((m = h.match(/^p(\d)$/))) return viewPertemuan(app, +m[1]);
+  if ((m = h.match(/^p(\d)-([a-z0-9]+)$/))) return viewKegiatan(app, +m[1], m[2]);
+  return viewBeranda(app);
+}
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+function viewProfil(app) {
+  app.innerHTML = `<div class="grid g2" style="align-items:start">
+    <div class="hero"><div class="tag">Modul 3 · Informatika &amp; KKA</div><h1 style="margin-top:8px">Selamat datang di DATA BICARA</h1>
+    <p>Di sini kamu akan mengerjakan semua kegiatan Modul 3: mengolah data dengan spreadsheet, menemukan cerita di balik angka, sampai membuat video data.</p></div>
+    <form class="card" id="fProfil" novalidate><h2 style="margin-top:0">Masuk</h2>
+      <div class="grid g2"><div><label class="f" for="kelas">Kelas</label><select id="kelas"><option value="">Pilih…</option>${KELAS.map(k => `<option>${k}</option>`).join('')}</select></div>
+      <div><label class="f" for="kode">Kode kelas</label><input type="text" id="kode" autocomplete="off" maxlength="6" style="text-transform:uppercase;letter-spacing:3px;font-weight:700" placeholder="dari guru"></div></div>
+      <div class="row" style="margin-top:10px"><button class="btn ghost sm" type="button" id="bAmbil">Tampilkan daftar nama</button><span class="muted" id="pInfo" style="font-size:14px"></span></div>
+      <div id="pNama" style="display:none"><label class="f" for="murid">Pilih namamu</label><select id="murid"></select></div>
+      <div id="pManual" style="display:none"><label class="f" for="nama">Nama lengkap</label><input type="text" id="nama" autocomplete="off">
+        <label class="f" for="absen">No. absen</label><input type="number" id="absen" min="1" max="45"></div>
+      <label class="f" for="kelompok">Nomor kelompok (dari guru)</label><select id="kelompok"><option value="">Belum ada</option>${[1,2,3,4,5,6,7,8].map(k => `<option>${k}</option>`).join('')}</select>
+      <p class="muted" style="font-size:14px">Komputer lab dipakai bergantian. Saat selesai, tekan namamu di pojok kanan atas lalu pilih <b>Ganti murid</b>.</p>
+      <div class="row"><button class="btn" type="submit">Mulai</button><a href="#" id="aManual" style="font-size:14px">Namaku tidak ada / tidak ada internet</a></div></form></div>`;
+  let mode = 'daftar';
+  const isiNama = data => { $('#murid').innerHTML = '<option value="">Pilih…</option>' + data.map(m => `<option value="${esc(m.absen)}">${esc(m.absen)}. ${esc(m.nama)}</option>`).join(''); $('#pNama').style.display = ''; $('#pInfo').textContent = `${data.length} murid`; };
+  const coba = async () => {
+    const kelas = $('#kelas').value, kode = $('#kode').value.trim().toUpperCase();
+    if (!kelas || !kode) return alertBox('Belum lengkap', 'Pilih kelas dan ketik kode kelas dari guru.');
+    $('#pInfo').textContent = 'Memuat…';
+    try { isiNama(await ambilRoster(kelas, kode)); }
+    catch (err) { const c = store.get('roster.' + kelas, null); if (c && c.kode === kode && c.data.length) { isiNama(c.data); $('#pInfo').textContent = 'Daftar tersimpan (offline)'; } else { $('#pInfo').textContent = ''; alertBox('Gagal memuat', (err.message || 'Periksa internet') + '. Cek kembali kode kelas.'); } }
+  };
+  $('#bAmbil').onclick = coba;
+  $('#aManual').onclick = e => { e.preventDefault(); mode = 'manual'; $('#pManual').style.display = ''; $('#pNama').style.display = 'none'; };
+  $('#fProfil').onsubmit = e => { e.preventDefault();
+    const kelas = $('#kelas').value, kode = $('#kode').value.trim().toUpperCase(), kelompok = $('#kelompok').value;
+    if (!kelas) return alertBox('Belum lengkap', 'Pilih kelasmu.');
+    if (mode === 'daftar') { const ab = $('#murid').value; if (!ab) return alertBox('Belum lengkap', 'Tampilkan daftar nama lalu pilih namamu.');
+      const m = rosterOf(kelas).find(x => x.absen === ab); store.set('profil', { nama: m.nama, kelas, absen: ab, kelompok, kode }); }
+    else { const nama = $('#nama').value.trim(), absen = $('#absen').value; if (!nama || !absen) return alertBox('Belum lengkap', 'Isi nama dan nomor absen.'); store.set('profil', { nama, kelas, absen, kelompok, kode, manual: true }); }
+    render(); };
+}
+
+function progres(p) { const ks = p.kegiatan.filter(k => k.r); const d = ks.filter(k => isDone(p.n, k.id)).length; return [d, ks.length]; }
+function viewBeranda(app) {
+  app.innerHTML = `<section class="hero"><div class="tag">Proyek Modul 3</div><div class="pq">"${esc(PROYEK)}"</div>
+    <p style="opacity:.85;margin-bottom:0">6 pertemuan · produk akhir: video data 60–90 detik untuk warga kelas</p></section>
+    <h2>Pertemuan</h2><div class="grid g3">${PERTEMUAN.map(p => { const [d, t] = progres(p); const siap = p.kegiatan.some(k => k.r && k.id !== 'tiket');
+      return `<a class="card pcard" href="#p${p.n}"><div class="row" style="justify-content:space-between"><span class="pnum">P${p.n}</span>${siap ? '<span class="badge">Tersedia</span>' : '<span class="badge soon">Kerangka</span>'}</div>
+      <h3>${esc(p.judul)}</h3><div class="muted" style="font-size:14px">${esc(p.sub)}</div><div class="bar"><i style="width:${t ? d / t * 100 : 0}%"></i></div><div class="muted" style="font-size:13px;margin-top:4px">${d}/${t} kegiatan selesai</div></a>`; }).join('')}</div>`;
+}
+
+function viewPertemuan(app, n) {
+  const p = PERTEMUAN[n - 1]; if (!p) return viewBeranda(app);
+  app.innerHTML = `<div class="crumb"><a href="#">Beranda</a> › Pertemuan ${n}</div>
+    <h1>P${n} · ${esc(p.judul)}</h1><div class="muted">${esc(p.sub)} · ${esc(p.tp)}</div>
+    <div class="note"><b>Hari ini kamu akan:</b><ul style="margin:6px 0 0;padding-left:20px">${p.tujuan.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
+    <h2>Kegiatan</h2><ul class="klist">${p.kegiatan.map((k, i) => { const done = isDone(n, k.id); const ok = !!k.r;
+      const inner = `<span class="n">${done ? '&#10003;' : i + 1}</span><span class="t"><b>${esc(k.judul)}</b><span class="m">${esc(k.desc)}</span></span>
+        <span class="row" style="gap:6px">${k.jenis === 'kelompok' ? '<span class="badge grp">Kelompok</span>' : ''}${k.menit ? `<span class="badge">${k.menit}'</span>` : ''}${!ok ? '<span class="badge soon">Segera</span>' : done ? '<span class="badge done">Selesai</span>' : ''}</span>`;
+      return ok ? `<li><a class="kitem ${done ? 'isdone' : ''}" href="#p${n}-${k.id}">${inner}</a></li>` : `<li><div class="kitem soon">${inner}</div></li>`; }).join('')}</ul>`;
+}
+
+function viewKegiatan(app, n, id) {
+  const p = PERTEMUAN[n - 1]; const kg = p?.kegiatan.find(k => k.id === id);
+  if (!kg || !kg.r) return viewPertemuan(app, n);
+  const idx = p.kegiatan.indexOf(kg); const next = p.kegiatan.slice(idx + 1).find(k => k.r);
+  app.innerHTML = `<div class="crumb"><a href="#">Beranda</a> › <a href="#p${n}">Pertemuan ${n}</a> › ${esc(kg.judul)}</div>
+    <div class="row" style="justify-content:space-between"><h1>${esc(kg.judul)}</h1><span class="row">${kg.jenis === 'kelompok' ? '<span class="badge grp">Kelompok · cukup 1 anggota mengirim</span>' : '<span class="badge">Individu</span>'}${kg.menit ? `<span class="badge">${kg.menit} menit</span>` : ''}</span></div>
+    ${isDone(n, id) ? '<div class="note amber">Kamu sudah pernah mengirim kegiatan ini. Kalau mengirim lagi, guru akan memakai kiriman terbaru.</div>' : ''}
+    <div id="act"></div>
+    <div class="row" style="justify-content:space-between;margin-top:26px"><a class="btn ghost" href="#p${n}">← Daftar kegiatan</a>${next ? `<a class="btn ghost" href="#p${n}-${next.id}">${esc(next.judul)} →</a>` : ''}</div>`;
+  const root = $('#act');
+  R[kg.r](root, { n, kg, key: `P${n}-${kg.id}` });
+  cekStatusKelompok(n, kg);
+}
+async function cekStatusKelompok(n, kg) {
+  const u = profil(); if (kg.jenis !== 'kelompok' || !scriptURL() || !u.kode) return;
+  try {
+    const q = new URLSearchParams({ aksi: 'status', kelas: u.kelas, kode: u.kode, absen: u.absen, pertemuan: 'P' + n, kegiatan: kg.id });
+    const j = await (await fetch(scriptURL() + '?' + q)).json();
+    if (!j.ok || !j.ada || location.hash !== `#p${n}-${kg.id}`) return;
+    if (j.oleh && j.oleh !== u.nama) {
+      markDone(n, kg.id, { skor: '', maks: '', waktu: j.waktu, oleh: j.oleh });
+      const box = document.createElement('div'); box.className = 'note';
+      box.innerHTML = `<b>Sudah dikirim oleh kelompokmu</b> (oleh ${esc(j.oleh)}, ${esc(new Date(j.waktu).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }))}). Kamu tidak perlu mengirim lagi. Kalau kelompok ingin memperbaiki jawaban, cukup satu orang yang mengirim ulang.`;
+      $('#act').prepend(box);
+    }
+  } catch (e) {}
+}
+
+/* tombol kirim standar */
+function kirimBar(root, label = 'Kirim ke guru') { const d = document.createElement('div'); d.innerHTML = `<div class="row" style="margin-top:18px"><button class="btn amber big" data-kirim>${label}</button></div><div class="status" data-status></div>`; root.appendChild(d); return d; }
+async function doKirim(root, ctx, data, after) {
+  const b = $('[data-kirim]', root); b.disabled = true; b.textContent = 'Mengirim…';
+  const h = await kirim(ctx.n, ctx.kg, data); const [cls, msg] = statusMsg(h);
+  const s = $('[data-status]', root); s.className = 'status ' + cls; s.textContent = msg; b.textContent = 'Kirim lagi'; b.disabled = false;
+  if (after) after();
+}
+function anggotaField() {
+  const u = profil(); const daftar = rosterOf(u.kelas).filter(m => m.absen !== String(u.absen));
+  const klp = u.kelompok ? '' : `<label class="f">Nomor kelompok</label><select name="kelompok_isi">${[1,2,3,4,5,6,7,8].map(k => `<option>${k}</option>`).join('')}</select>`;
+  if (!daftar.length) return klp + `<label class="f">Nama anggota kelompok</label><input type="text" name="anggota_teks" placeholder="contoh: Raka, Nadia, Dimas">`;
+  return klp + `<label class="f">Centang teman sekelompokmu <span class="muted" style="font-weight:400">(namamu otomatis ikut)</span></label>
+    <div class="card" style="max-height:260px;overflow:auto;padding:10px 14px">${daftar.map(m => `<label class="chk"><input type="checkbox" name="agt" value="${esc(m.absen)}" data-nodraft>${esc(m.absen)}. ${esc(m.nama)}</label>`).join('')}</div>`;
+}
+function ambilAnggota(root) {
+  const u = profil(); const daftar = rosterOf(u.kelas);
+  const absen = $$('input[name=agt]:checked', root).map(x => x.value);
+  const nama = absen.map(a => (daftar.find(m => m.absen === a) || {}).nama || a);
+  const kelompok = val(root, 'kelompok_isi') || u.kelompok || '';
+  return { anggota: absen, kelompok, namaAnggota: $('input[name=agt]', root) ? [u.nama, ...nama].join(', ') : [u.nama, val(root, 'anggota_teks')].filter(Boolean).join(', ') };
+}
+function cekAnggota(root) { if ($('input[name=agt]', root) && !$$('input[name=agt]:checked', root).length) { alertBox('Anggota belum dipilih', 'Centang nama teman sekelompokmu dulu, supaya mereka ikut tercatat.'); return false; } return true; }
+
+/* ===================== KEGIATAN ===================== */
+const R = {};
+const angka = s => { const t = String(s).trim().replace(/\s/g, '').replace(',', '.'); return t === '' ? NaN : Number(t); };
+const normRumus = s => String(s).toUpperCase().replace(/\s/g, '').replace(/;/g, ',');
+
+R.pretest = (root, ctx) => {
+  const Q = [['Di spreadsheet, Cell Address ditulis dengan huruf column lalu nomor row, contoh C4.', 'B', 'Huruf menunjukkan column, angka menunjukkan row.'],
+    ['Jika formula =A2+B2 di cell C2 disalin ke C3, formula-nya tetap =A2+B2.', 'S', 'Relative Reference ikut bergeser menjadi =A3+B3.'],
+    ['Tanda $ pada $M$2 membuat address itu tidak berubah saat formula disalin.', 'B', 'Itulah Absolute Reference.'],
+    ['Spreadsheet hanya bisa menyimpan angka, tidak bisa menyimpan teks.', 'S', 'Cell bisa berisi angka, teks, tanggal, maupun formula.']];
+  root.innerHTML = `<div class="inst">Jawab sejujurnya. Ini bukan untuk nilai, tetapi supaya guru tahu titik awalmu.</div>
+    ${Q.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${esc(q[0])}<div class="tf" style="margin-top:8px"><label><input type="radio" name="q${i}" value="B">Benar</label><label><input type="radio" name="q${i}" value="S">Salah</label></div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    <div class="q"><b>5.</b> Kamu diminta menghitung total waktu layar seminggu untuk 32 teman sekelas. Bagaimana caramu supaya cepat dan tidak salah hitung?<textarea name="q4" placeholder="Tulis singkat…"></textarea></div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    const ans = Q.map((_, i) => ($(`[name=q${i}]:checked`, root) || {}).value || '');
+    if (ans.some(a => !a) || !val(root, 'q4')) return alertBox('Belum lengkap', 'Jawab semua soal dulu, ya.');
+    const skor = ans.filter((a, i) => a === Q[i][1]).length;
+    doKirim(root, ctx, { skor, maks: 4, ringkasan: `B/S ${skor}/4 · ${val(root, 'q4')}`, jawaban: { bs: ans, q5: val(root, 'q4') } }, () => {
+      Q.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (ans[i] === q[1] ? '<span class="right">Tepat.</span> ' : '<span class="wrong">Belum tepat.</span> ') + esc(q[2]); });
+    });
+  };
+};
+
+/* worksheet tiruan */
+function sheetHTML(hl) {
+  const cols = ['A', 'B', 'C', 'D', 'E', 'F'];
+  return `<div class="ss"><div class="ss-bar"><div class="ss-nb" data-t="namebox">A1</div><div class="ss-fx" data-t="fbar"><i>fx</i> <span data-fx>No</span></div></div>
+    <div class="ss-grid"><table><thead><tr><th class="ss-c"></th>${cols.map(c => `<th data-t="col-${c}">${c}</th>`).join('')}</tr></thead>
+    <tbody>${MINI.map((r, i) => `<tr><th data-t="row-${i + 1}">${i + 1}</th>${r.map((v, j) => { const a = cols[j] + (i + 1); return `<td data-t="cell-${a}" data-a="${a}" data-v="${esc(v)}" class="${a === hl ? 'hl' : ''} ${i === 0 ? 'h' : ''}">${esc(v)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>
+    <div class="ss-tabs"><span data-t="tab-Data" class="on">Data</span><span data-t="tab-Ringkasan">Ringkasan</span><span data-t="tab-Target">Target</span></div></div>`;
+}
+
+R.peta = (root, ctx) => {
+  let i = 0, hasil = [], awal = null; const n = PETA.length;
+  root.innerHTML = `<div class="inst">Ikuti tantangan satu per satu pada worksheet tiruan di bawah. Setiap tantangan hanya punya <b>satu kesempatan</b>, jadi baca baik-baik sebelum mengklik.</div>
+    <div class="grid g2" style="align-items:start"><div data-ss></div><div><div class="card" data-tg></div><div data-fbk></div></div></div><div data-end></div>`;
+  const draw = () => {
+    const p = PETA[i];
+    $('[data-ss]', root).innerHTML = sheetHTML(p && p.hl);
+    if (!p) return;
+    $('[data-tg]', root).innerHTML = `<div class="muted" style="font-size:13px">Tantangan ${i + 1} dari ${n} · skor ${hasil.filter(Boolean).length}</div><h3 style="margin:6px 0 10px">${p.s}</h3>
+      ${p.t === 'ketik' ? `<div class="row"><input type="text" data-in style="max-width:140px;text-transform:uppercase" placeholder="mis. A1"><button class="btn sm" data-ok>Jawab</button></div>` : p.t === 'range' ? `<div class="muted" data-rg>Klik cell awal…</div>` : '<div class="muted">Klik langsung pada worksheet.</div>'}`;
+  };
+  const jawab = (benar, pilih) => {
+    const p = PETA[i]; hasil.push(benar);
+    $('[data-fbk]', root).innerHTML = `<div class="note ${benar ? '' : 'coral'}">${benar ? '<span class="right">Tepat!</span>' : `<span class="wrong">Belum tepat</span> (kamu memilih ${esc(pilih)}).`} ${esc(p.why)}</div>`;
+    i++; awal = null;
+    if (i < n) return draw();
+    $('[data-ss]', root).innerHTML = sheetHTML(); $('[data-tg]', root).innerHTML = `<h3 style="margin-top:0">Selesai!</h3><div class="stat">${hasil.filter(Boolean).length}/${n}</div><div class="muted">Kirim hasilmu ke guru.</div>`;
+    kb.style.display = '';
+  };
+  root.addEventListener('click', e => {
+    const p = PETA[i]; if (!p) return;
+    if (e.target.closest('[data-ok]')) { const v = ($('[data-in]', root).value || '').trim().toUpperCase().replace(/\s/g, ''); if (!v) return; return jawab(v === p.k, v); }
+    const t = e.target.closest('[data-t]'); if (!t || !$('[data-ss]', root).contains(t)) return;
+    if (t.dataset.a) { $('.ss-nb', root).textContent = t.dataset.a; $('[data-fx]', root).textContent = t.dataset.v; }
+    if (p.t === 'klik') return jawab(t.dataset.t === p.k, t.dataset.t.replace('cell-', 'cell ').replace('col-', 'column ').replace('row-', 'row ').replace('tab-', 'tab ').replace('namebox', 'Name Box').replace('fbar', 'Formula Bar'));
+    if (p.t === 'range' && t.dataset.a) {
+      if (!awal) { awal = t.dataset.a; t.classList.add('hl'); $('[data-rg]', root).textContent = `Cell awal ${awal}. Sekarang klik cell akhir…`; return; }
+      const r = awal + ':' + t.dataset.a; return jawab(r === p.k, r);
+    }
+  });
+  root.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-in]')) $('[data-ok]', root).click(); });
+  draw();
+  const kb = kirimBar(root); kb.style.display = 'none';
+  $('[data-kirim]', kb).onclick = () => { const skor = hasil.filter(Boolean).length; const salah = hasil.map((b, j) => b ? null : j + 1).filter(Boolean);
+    doKirim(root, ctx, { skor, maks: n, ringkasan: `Peta worksheet ${skor}/${n}${salah.length ? ' · salah no. ' + salah.join(', ') : ''}`, jawaban: { hasil } }); };
+};
+
+R.rumus = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Bayangkan formula di cell asal <b>disalin</b> ke cell tujuan (Ctrl+C lalu Ctrl+V, atau ditarik). Pilih formula yang akan muncul di cell tujuan. Ingat: <b>Relative Reference</b> ikut bergeser, reference yang diberi <b>$</b> terkunci.</div>
+    ${RUMUS.map((q, i) => `<div class="q"><b>${i + 1}.</b> Cell <b>${q.f[0]}</b> berisi <code>${esc(q.f[1])}</code>. Formula itu disalin ke <b>${q.ke}</b>. ${i === 4 ? 'Apa yang terjadi?' : 'Formula di ' + q.ke + ' menjadi…'}${i === 5 ? ' <span class="badge grp">Tantangan</span>' : ''}
+      <div class="choice" style="margin-top:8px">${q.o.map((o, j) => `<label><input type="radio" name="r${i}" value="${j}"><code style="background:none">${esc(o)}</code></label>`).join('')}</div><div class="fbk" data-fb="${i}"></div></div>`).join('')}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    const ans = RUMUS.map((_, i) => ($(`[name=r${i}]:checked`, root) || {}).value);
+    if (ans.some(a => a === undefined)) return alertBox('Belum lengkap', 'Jawab keenam soal dulu.');
+    const skor = ans.filter((a, i) => +a === RUMUS[i].a).length;
+    doKirim(root, ctx, { skor, maks: RUMUS.length, ringkasan: `Tebak formula ${skor}/${RUMUS.length} · salah no. ${ans.map((a, i) => +a === RUMUS[i].a ? null : i + 1).filter(Boolean).join(', ') || '-'}`, jawaban: { ans: ans.map(Number) } }, () => {
+      RUMUS.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (+ans[i] === q.a ? '<span class="right">Tepat.</span> ' : `<span class="wrong">Belum tepat.</span> Jawaban: <code>${esc(q.o[q.a])}</code>. `) + esc(q.why); });
+    });
+  };
+};
+
+R.misi = (root, ctx) => {
+  const items = MISI.flatMap(m => m.q);
+  root.innerHTML = `<div class="inst"><b>Tugas kelompok.</b> Data ini <b>fiktif</b>: kebiasaan 32 murid kelas VIII.<ol>
+      <li><a class="btn sm" href="${FILE_DATA}" download>Unduh data (.xlsx)</a> lalu buka di <b>Excel</b>, atau di <b>Google Sheets</b>: File → Impor → Unggah.</li>
+      <li>Kerjakan misi berurutan. Murid nomor 1 ada di <b>row 2</b> karena row 1 berisi judul column.</li>
+      <li>Tekan <b>Periksa</b> kapan saja. Perbaiki formula di worksheet jika ada yang belum tepat, lalu kirim.</li></ol></div>
+    ${MISI.map(m => `<div class="q"><h3 style="margin-top:0">${m.judul}</h3><p style="margin:4px 0 10px">${m.langkah}</p>
+      ${m.q.map(q => `<div class="row" style="margin:8px 0"><label style="flex:1;min-width:240px">${esc(q[1])}</label><input type="text" name="${q[0]}" style="max-width:200px" autocomplete="off"><span data-ck="${q[0]}" style="width:24px;font-weight:900"></span></div>`).join('')}
+      ${m.id === 'm4' ? '<label class="f">Mengapa nilai di J3 berbeda dengan I3? Apa fungsi tanda $?</label><textarea name="m4e"></textarea>' : ''}</div>`).join('')}
+    <div class="row"><button class="btn" data-cek>Periksa</button><span data-sk class="muted"></span></div>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const benar = q => { const v = val(root, q[0]); return typeof q[2] === 'number' ? Math.abs(angka(v) - q[2]) < 1e-6 : normRumus(v) === normRumus(q[2]); };
+  const cek = () => { let s = 0; items.forEach(q => { const ok = benar(q); s += ok; $(`[data-ck="${q[0]}"]`, root).innerHTML = val(root, q[0]) ? (ok ? '<span class="right">&#10003;</span>' : '<span class="wrong">&#10007;</span>') : ''; });
+    $('[data-sk]', root).innerHTML = `<b>${s}/${items.length} tepat.</b> ${s < items.length ? 'Cek lagi formula-nya di worksheet.' : 'Mantap!'}`; return s; };
+  $('[data-cek]', root).onclick = cek;
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    const kosong = items.filter(q => !val(root, q[0])).length;
+    if (kosong || !val(root, 'm4e')) return alertBox('Belum lengkap', 'Isi semua jawaban misi dan penjelasan Misi 4.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root); const skor = cek();
+    const jw = Object.fromEntries(items.map(q => [q[0], val(root, q[0])]));
+    doKirim(root, ctx, { skor, maks: items.length, anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `Misi ${skor}/${items.length} · K10: ${jw.m3f} · Alasan $: ${val(root, 'm4e')}`, jawaban: { ...jw, m4e: val(root, 'm4e'), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
+R.tanya = (root, ctx) => {
+  root.innerHTML = `<div class="hero" style="margin-bottom:14px"><div class="tag">Pertanyaan proyek</div><div class="pq">"${esc(PROYEK)}"</div></div>
+    <div class="inst">Data yang akan kalian olah: <b>tidur, waktu layar, sarapan, olahraga, dan minum air</b> warga kelas VIII. Pertanyaan yang baik bisa dijawab dengan angka, contoh: <i>"Apakah murid yang lebih lama menatap layar, tidurnya lebih sedikit?"</i></div>
+    ${[1, 2, 3].map(i => `<label class="f">Pertanyaan ${i}</label><input type="text" name="p${i}">`).join('')}
+    <label class="f">Pertanyaan mana yang paling menarik untuk video kalian?</label><select name="pilih"><option value="">Pilih…</option><option>1</option><option>2</option><option>3</option></select>
+    <label class="f">Dugaan awal kalian (jawaban sementara)</label><textarea name="duga"></textarea>
+    <label class="f">Penonton utama video</label><select name="aud"><option value="">Pilih…</option>${['Teman sekelas', 'Seluruh kelas VIII', 'Adik kelas VII', 'Orang tua', 'Warga sekolah (mading digital)'].map(o => `<option>${o}</option>`).join('')}</select>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const p = [1, 2, 3].map(i => val(root, 'p' + i));
+    if (p.some(x => !x) || !val(root, 'pilih') || !val(root, 'duga') || !val(root, 'aud')) return alertBox('Belum lengkap', 'Isi tiga pertanyaan, pilihan, dugaan, dan penonton.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root);
+    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `Pilihan: ${p[+val(root, 'pilih') - 1]} · Dugaan: ${val(root, 'duga')} · Penonton: ${val(root, 'aud')}`, jawaban: { pertanyaan: p, pilih: +val(root, 'pilih'), duga: val(root, 'duga'), audiens: val(root, 'aud'), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
+R.posttest = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Kerjakan sendiri. Soal 1–5 dinilai otomatis; soal 6 dinilai guru.</div>
+    ${POST.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${q.s}<div class="choice" style="margin-top:8px">${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}">${esc(o)}</label>`).join('')}</div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    <div class="q"><b>6.</b> Jelaskan dengan kata-katamu: kapan kita perlu memakai Absolute Reference ($)? Beri satu contoh dari data kebiasaan kelas.<textarea name="u" style="margin-top:8px"></textarea></div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const a = POST.map((_, i) => ($(`[name=p${i}]:checked`, root) || {}).value);
+    if (a.some(x => x === undefined) || !val(root, 'u')) return alertBox('Belum lengkap', 'Jawab keenam soal dulu.');
+    const skor = a.filter((x, i) => +x === POST[i].a).length;
+    doKirim(root, ctx, { skor, maks: 5, ringkasan: `PG ${skor}/5 · Uraian: ${val(root, 'u')}`, jawaban: { pg: a.map(Number), uraian: val(root, 'u') } }, () => {
+      POST.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = +a[i] === q.a ? '<span class="right">Tepat.</span>' : `<span class="wrong">Belum tepat.</span> Jawaban: ${esc(q.o[q.a])}`; }); });
+  };
+};
+
+R.survei = (root, ctx) => {
+  const F = [['tidur', 'Rata-rata lama tidur malam (jam)', 3, 14, '0.5'], ['layar', 'Rata-rata waktu layar untuk hiburan per hari (jam), di luar belajar', 0, 16, '0.5'], ['sarapan', 'Berapa hari dalam seminggu kamu sarapan?', 0, 7, '1'], ['olahraga', 'Total olahraga/aktivitas fisik dalam seminggu (menit)', 0, 1500, '10'], ['air', 'Rata-rata minum air putih per hari (gelas)', 0, 20, '1']];
+  root.innerHTML = `<div class="inst">Catat kebiasaanmu <b>selama 3 hari</b> lalu isi rata-ratanya. Jujur lebih penting daripada "bagus". Pada Pertemuan 2, data seluruh kelas ditampilkan <b>tanpa nama</b>.</div>
+    ${F.map(f => `<label class="f">${esc(f[1])}</label><input type="number" name="${f[0]}" min="${f[2]}" max="${f[3]}" step="${f[4]}">`).join('')}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const v = Object.fromEntries(F.map(f => [f[0], angka(val(root, f[0]))]));
+    const bad = F.find(f => isNaN(v[f[0]]) || v[f[0]] < f[2] || v[f[0]] > f[3]); if (bad) return alertBox('Periksa lagi', `Isian "${bad[1]}" harus angka antara ${bad[2]} dan ${bad[3]}.`);
+    doKirim(root, ctx, { skor: '', maks: '', ringkasan: `Tidur ${v.tidur} · Layar ${v.layar} · Sarapan ${v.sarapan} · Olahraga ${v.olahraga} · Air ${v.air}`, jawaban: v }); };
+};
+
+R.tiket = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Tiket keluar membantu guru tahu apa yang sudah kamu pahami dan apa yang masih membingungkan.</div>
+    <label class="f">3 hal baru yang kupelajari hari ini</label>${[1, 2, 3].map(i => `<input type="text" name="h${i}" style="margin-bottom:6px">`).join('')}
+    <label class="f">2 tindakan yang akan kulakukan</label>${[1, 2].map(i => `<input type="text" name="t${i}" style="margin-bottom:6px">`).join('')}
+    <label class="f">1 pertanyaan yang masih kupunya</label><input type="text" name="q1">
+    <label class="f">Hari ini aku merasa…</label><div class="choice" style="grid-template-columns:repeat(4,1fr)">${['1 · Bingung', '2 · Agak paham', '3 · Paham', '4 · Siap mengajari teman'].map((o, i) => `<label><input type="radio" name="rasa" value="${i + 1}">${o}</label>`).join('')}</div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const h = [1, 2, 3].map(i => val(root, 'h' + i)), t = [1, 2].map(i => val(root, 't' + i)), q = val(root, 'q1'), r = ($('[name=rasa]:checked', root) || {}).value;
+    if (h.some(x => !x) || t.some(x => !x) || !q || !r) return alertBox('Belum lengkap', 'Isi semua column tiket keluar.');
+    doKirim(root, ctx, { skor: +r, maks: 4, ringkasan: `Pemahaman ${r}/4 · Baru: ${h.join('; ')} · Tindakan: ${t.join('; ')} · Tanya: ${q}`, jawaban: { baru: h, tindakan: t, tanya: q, rasa: +r } }); };
+};
+
+/* ===================== MODE GURU ===================== */
+const KUNCI_GURU_INFO = {
+  'P1-pretest': 'Kunci: 1 B, 2 S, 3 B, 4 S. Skor 0–2 → kartu bantuan + duduk dengan tutor sebaya; 3–4 → reguler; 4 + uraian menyebut formula/isi otomatis → tantangan Mixed Reference.',
+  'P1-peta': 'Tercapai KKTP 1: ≥ 8/10. Kesalahan umum: membalik urutan (4D), salah membedakan Column Header dan cell.',
+  'P1-rumus': 'Kunci: 1 =A3+B3 · 2 =B10*7 · 3 =A5*$F$1 · 4 =C3+D3 · 5 =C3-M3 (salah) · 6 =$A6*C$1. Tercapai KKTP 2: ≥ 4/6 (soal 6 tantangan).',
+  'P1-misi': 'Kunci: H8 = 28 · H21 = 7 · I13 = -2 · I26 = -1,5 · K10 = =D10-$M$3 · K14 = 4 · J3 = 5,5 (salah karena M3 = batas layar). Tercapai KKTP 3: ≥ 5/7 dan alasan $ benar.',
+  'P1-tanya': 'Pertanyaan yang baik dapat dijawab dengan data yang ada (column tidur, layar, sarapan, olahraga, air) dan relevan dengan penonton.',
+  'P1-posttest': 'Kunci PG: 1 F12 · 2 32 cell · 3 =B6*C6 · 4 =D9*$H$1 · 5 =C2-$M$2. Skor otomatis = jumlah PG benar (0–5). Uraian dinilai 0–4 (Absolute dipakai saat formula merujuk satu cell tetap seperti target/batas). Nilai = PG × 12 + uraian × 10 (maks 100).',
+  'P1-survei': 'Data mentah untuk P2. Hapus column nama sebelum ditayangkan atau dibagikan.',
+};
+function viewGuru(app) {
+  const g = { url: scriptURL(), kunci: store.get('guru.kunci', ''), kelas: store.get('guru.kelas', ''), p: store.get('guru.p', '1'), k: store.get('guru.k', 'peta') };
+  const kegOpts = p => PERTEMUAN[p - 1].kegiatan.filter(k => k.r).map(k => `<option value="${k.id}" ${k.id === g.k ? 'selected' : ''}>${esc(k.judul)}</option>`).join('');
+  app.innerHTML = `<div class="crumb"><a href="#">Beranda</a> › Mode guru</div><h1>Mode Guru</h1>
+    <div class="grid g2" style="align-items:start"><form class="card" id="fg"><h3 style="margin-top:0">Koneksi Google Sheet</h3>
+      <label class="f">URL Web App Apps Script</label><input type="url" id="gUrl" value="${esc(g.url)}" placeholder="https://script.google.com/macros/s/…/exec">
+      <label class="f">Kunci guru</label><input type="password" id="gKey" value="${esc(g.kunci)}" placeholder="sesuai KUNCI_GURU di Code.gs">
+      <p class="muted" style="font-size:13px">Tersimpan hanya di peramban ini. Murid tetap memakai URL yang ditulis di CONFIG pada file index.html.</p>
+      <div class="grid g2"><div><label class="f">Kelas</label><select id="gKelas"><option value="">Semua</option>${KELAS.map(k => `<option ${k === g.kelas ? 'selected' : ''}>${k}</option>`).join('')}</select></div>
+      <div><label class="f">Pertemuan</label><select id="gP">${PERTEMUAN.map(p => `<option value="${p.n}" ${String(p.n) === String(g.p) ? 'selected' : ''}>P${p.n} · ${esc(p.judul)}</option>`).join('')}</select></div></div>
+      <label class="f">Kegiatan</label><select id="gK">${kegOpts(g.p)}</select>
+      <div class="row" style="margin-top:14px"><button class="btn" type="submit">Tampilkan rekap</button><button class="btn ghost" type="button" id="gKode">Kode kelas</button><label class="chk" style="margin:0"><input type="checkbox" id="gPid" ${store.get('guru.pid', false) ? 'checked' : ''}>Tampilan besar (PID)</label></div></form>
+    <div class="card"><h3 style="margin-top:0">Kunci &amp; kriteria</h3><div id="gInfo" class="muted"></div><h3>Keadaan web</h3><p style="margin:0">${g.url ? 'Terhubung ke Apps Script.' : '<b>Mode coba</b>: belum ada URL. Rekap di bawah hanya menampilkan kiriman dari perangkat ini.'}</p></div></div>
+    <div id="gOut" style="margin-top:18px"></div>`;
+  const info = () => $('#gInfo').textContent = KUNCI_GURU_INFO[`P${$('#gP').value}-${$('#gK').value}`] || 'Belum ada kunci untuk kegiatan ini.';
+  $('#gP').onchange = () => { $('#gK').innerHTML = kegOpts($('#gP').value); info(); }; $('#gK').onchange = info; info();
+  $('#gPid').onchange = e => { store.set('guru.pid', e.target.checked); document.documentElement.classList.toggle('pid', e.target.checked); };
+  $('#gKode').onclick = async () => {
+    const url = $('#gUrl').value.trim(), kunci = $('#gKey').value, out = $('#gOut');
+    if (!url) return alertBox('Belum terhubung', 'Isi URL Apps Script dulu.');
+    out.innerHTML = '<p class="muted">Memuat…</p>';
+    try { const j = await (await fetch(url + '?' + new URLSearchParams({ aksi: 'kode', kunci }))).json(); if (!j.ok) throw new Error(j.pesan);
+      const sel = $('#gKelas').value; const ent = Object.entries(j.data).filter(([k]) => KELAS.includes(k) && (!sel || k === sel));
+      out.innerHTML = `<h2>Kode kelas</h2><p class="muted">Tayangkan di PID. Murid memilih kelas, mengetik kode, lalu memilih namanya.</p><div class="grid g3">${ent.map(([k, c]) => `<div class="card" style="text-align:center"><div class="muted" style="font-weight:700">${esc(k)}</div><div class="stat" style="font-size:52px;letter-spacing:6px">${esc(c)}</div></div>`).join('')}</div>`; }
+    catch (err) { out.innerHTML = `<div class="note coral"><b>Gagal memuat:</b> ${esc(err.message || 'periksa kunci guru')}.</div>`; }
+  };
+  $('#fg').onsubmit = async e => { e.preventDefault();
+    const url = $('#gUrl').value.trim(), kunci = $('#gKey').value, kelas = $('#gKelas').value, p = $('#gP').value, k = $('#gK').value;
+    store.set('guru.url', url); store.set('guru.kunci', kunci); store.set('guru.kelas', kelas); store.set('guru.p', p); store.set('guru.k', k);
+    const out = $('#gOut'); out.innerHTML = '<p class="muted">Memuat…</p>';
+    let rows, murid = [];
+    if (url) { try { const q = new URLSearchParams({ aksi: 'rekap', kunci, kelas, pertemuan: 'P' + p, kegiatan: k }); const res = await fetch(url + '?' + q); const j = await res.json(); if (!j.ok) throw new Error(j.pesan); rows = j.data; murid = j.murid || []; }
+      catch (err) { out.innerHTML = `<div class="note coral"><b>Gagal memuat:</b> ${esc(err.message || 'periksa URL, kunci guru, dan koneksi internet')}.</div>`; return; } }
+    else rows = store.get('riwayat', []).filter(r => r.pertemuan === 'P' + p && r.kegiatan === k && (!kelas || r.kelas === kelas));
+    const last = {}; rows.forEach(r => { last[`${r.kelas}|${r.absen}`] = r; }); rows = Object.values(last).sort((a, b) => (a.kelas + String(a.absen).padStart(2, '0')).localeCompare(b.kelas + String(b.absen).padStart(2, '0')));
+    const sk = rows.map(r => parseFloat(r.skor)).filter(x => !isNaN(x)); const maks = rows.find(r => r.maks)?.maks || '';
+    const sudah = new Set(rows.map(r => String(r.absen))); const belum = murid.filter(m => !sudah.has(String(m.absen)));
+    const zona = k === 'audit' ? ['HIJAU', 'KUNING', 'MERAH'].map(z => [z, rows.filter(r => String(r.ringkasan).includes('Zona ' + z)).length]) : null;
+    out.innerHTML = `<div class="grid g3"><div class="card"><div class="stat">${rows.length}</div><div class="muted">murid tercatat${murid.length ? ` dari ${murid.length}` : ''} (kiriman terbaru)</div></div>
+      <div class="card"><div class="stat">${sk.length ? (sk.reduce((a, b) => a + b, 0) / sk.length).toFixed(1) : '–'}${maks ? `<span style="font-size:20px">/${esc(maks)}</span>` : ''}</div><div class="muted">rerata skor</div></div>
+      ${zona ? `<div class="card">${zona.map(([z, c]) => `<div class="row" style="justify-content:space-between"><b>${z}</b><span class="stat" style="font-size:26px">${c}</span></div>`).join('')}</div>` : ''}</div>
+      ${kelas && murid.length ? `<h2>Belum mengerjakan (${belum.length})</h2><div class="card">${belum.length ? belum.map(m => `${esc(m.absen)}. ${esc(m.nama)}`).join(' · ') : '<span class="right">Semua murid sudah tercatat.</span>'}</div>` : (url && !kelas ? '<div class="note">Pilih satu kelas untuk melihat daftar murid yang belum mengerjakan.</div>' : '')}
+      <h2>Rincian</h2><div class="tw"><table><thead><tr><th>Kelas</th><th>Absen</th><th>Nama</th><th>Klp</th><th>Skor</th><th>Ringkasan jawaban</th><th>Dikirim oleh</th><th>Waktu</th></tr></thead>
+      <tbody>${rows.map(r => `<tr><td>${esc(r.kelas)}</td><td>${esc(r.absen)}</td><td>${esc(r.nama)}</td><td>${esc(r.kelompok)}</td><td>${esc(r.skor)}${r.maks ? '/' + esc(r.maks) : ''}</td><td>${esc(r.ringkasan)}</td><td>${r.oleh && r.oleh !== r.nama ? esc(r.oleh) : ''}</td><td style="white-space:nowrap">${esc(new Date(r.waktu).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }))}</td></tr>`).join('') || '<tr><td colspan="8" class="muted">Belum ada kiriman.</td></tr>'}</tbody></table></div>`;
+  };
+}
+
+/* ===================== MULAI ===================== */
+render(); flushQueue(false);
+</script>
+</body>
+</html>
