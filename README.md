@@ -1,6 +1,6 @@
 # DATA BICARA · Modul 3 Informatika & KKA Kelas VIII
 
-Web pembelajaran untuk Modul 3 gabungan Informatika (Lembar Kerja Pengolah Data, BK.8.13–8.18) dan KKA (Produksi Konten Audio & Video, LD.8.1–8.6), SMP Labschool Jakarta. Kelas VIII-A sampai VIII-G.
+Web pembelajaran (P1–P6 lengkap) untuk Modul 3 gabungan Informatika (Lembar Kerja Pengolah Data, BK.8.13–8.18) dan KKA (Produksi Konten Audio & Video, LD.8.1–8.6), SMP Labschool Jakarta. Kelas VIII-A sampai VIII-G.
 
 **Proyek:** "Bagaimana kita mengubah data kebiasaan warga kelas VIII menjadi video pendek yang membuat teman ingin hidup lebih sehat?"
 
