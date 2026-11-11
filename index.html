@@ -18,6 +18,7 @@ header.top{background:var(--teal);color:#fff;position:sticky;top:0;z-index:20}
 .brand small{display:block;font-weight:500;letter-spacing:0;opacity:.8;font-size:12px}
 .top .sp{flex:1}
 .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer}
+.edp{display:inline-block;font-size:12px;font-weight:700;color:var(--teal);background:#E6F0F7;border-radius:8px;padding:3px 10px;margin-top:6px;line-height:1.35}
 .chip.warn{background:var(--amber);color:var(--teal);border-color:var(--amber);font-weight:700}
 main{max-width:1080px;margin:0 auto;padding:22px 18px 80px}
 h1{font-size:28px;line-height:1.2;margin:4px 0 8px}
@@ -63,7 +64,7 @@ a.kitem:hover{border-color:var(--teal3)}
 .note.coral{background:#FBE3DC}
 .note b:first-child{color:var(--teal)}
 label.f{display:block;font-weight:700;margin:14px 0 6px}
-input[type=text],input[type=number],input[type=password],input[type=url],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+input[type=text],input[type=number],input[type=password],input[type=url],input[type=date],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
 textarea{min-height:84px;resize:vertical}
 input:focus,select:focus,textarea:focus{outline:3px solid rgba(42,157,143,.25);border-color:var(--teal3)}
 .inst{background:#fff;border-left:0;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0 18px}
@@ -187,6 +188,8 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
 /* ===================== DATA MODUL ===================== */
+const EDP = ['Tanya', 'Selidiki', 'Rancang', 'Buat (audio)', 'Buat (video)', 'Uji, Perbaiki, Bagikan'];
+const SINTAKS = ['Penentuan pertanyaan mendasar', 'Mendesain perencanaan proyek', 'Menyusun jadwal & rancangan produk', 'Memonitor pelaksanaan proyek', 'Memonitor pelaksanaan proyek', 'Menguji hasil & evaluasi pengalaman'];
 const PERTEMUAN = [
   { n: 1, judul: 'Cell, Address & Formula', sub: 'Mengenal worksheet dan Relative & Absolute Reference', tp: 'Informatika BK.8.13–8.14',
     tujuan: ['Mengenali elemen worksheet dan menunjuk Cell Address serta range dengan tepat.', 'Memprediksi hasil formula yang disalin dengan Relative Reference dan Absolute Reference ($).', 'Menerapkan Relative & Absolute Reference pada data kebiasaan kelas.'],
@@ -418,16 +421,16 @@ function viewProfil(app) {
 function progres(p) { const ks = p.kegiatan.filter(k => k.r); const d = ks.filter(k => isDone(p.n, k.id)).length; return [d, ks.length]; }
 function viewBeranda(app) {
   app.innerHTML = `<section class="hero"><div class="tag">Proyek Modul 3</div><div class="pq">"${esc(PROYEK)}"</div>
-    <p style="opacity:.85;margin-bottom:0">6 pertemuan · produk akhir: video data 60–90 detik untuk warga kelas</p></section>
+    <p style="opacity:.85;margin-bottom:0">6 pertemuan · produk akhir: video data 60–90 detik untuk warga kelas</p><p style="opacity:.85;margin:6px 0 0;font-size:14px">Alur PjBL-STEM: Tanya (P1) → Selidiki (P2) → Rancang (P3) → Buat (P4–P5) → Uji, Perbaiki, Bagikan (P6)</p></section>
     <h2>Pertemuan</h2><div class="grid g3">${PERTEMUAN.map(p => { const [d, t] = progres(p); const siap = p.kegiatan.some(k => k.r && k.id !== 'tiket');
       return `<a class="card pcard" href="#p${p.n}"><div class="row" style="justify-content:space-between"><span class="pnum">P${p.n}</span>${siap ? '<span class="badge">Tersedia</span>' : '<span class="badge soon">Kerangka</span>'}</div>
-      <h3>${esc(p.judul)}</h3><div class="muted" style="font-size:14px">${esc(p.sub)}</div><div class="bar"><i style="width:${t ? d / t * 100 : 0}%"></i></div><div class="muted" style="font-size:13px;margin-top:4px">${d}/${t} kegiatan selesai</div></a>`; }).join('')}</div>`;
+      <h3>${esc(p.judul)}</h3><div class="muted" style="font-size:14px">${esc(p.sub)}</div><span class="edp">${esc(SINTAKS[p.n - 1])} · ${esc(EDP[p.n - 1])}</span><div class="bar"><i style="width:${t ? d / t * 100 : 0}%"></i></div><div class="muted" style="font-size:13px;margin-top:4px">${d}/${t} kegiatan selesai</div></a>`; }).join('')}</div>`;
 }
 
 function viewPertemuan(app, n) {
   const p = PERTEMUAN[n - 1]; if (!p) return viewBeranda(app);
   app.innerHTML = `<div class="crumb"><a href="#">Beranda</a> › Pertemuan ${n}</div>
-    <h1>P${n} · ${esc(p.judul)}</h1><div class="muted">${esc(p.sub)} · ${esc(p.tp)}</div>
+    <h1>P${n} · ${esc(p.judul)}</h1><div class="muted">${esc(p.sub)} · ${esc(p.tp)}</div><div><span class="edp">PjBL-STEM · ${esc(SINTAKS[n - 1])} · EDP: ${esc(EDP[n - 1])}</span></div>
     <div class="note"><b>Hari ini kamu akan:</b><ul style="margin:6px 0 0;padding-left:20px">${p.tujuan.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
     <h2>Kegiatan</h2><ul class="klist">${p.kegiatan.map((k, i) => { const done = isDone(n, k.id); const ok = !!k.r;
       const inner = `<span class="n">${done ? '&#10003;' : i + 1}</span><span class="t"><b>${esc(k.judul)}</b><span class="m">${esc(k.desc)}</span></span>
@@ -933,15 +936,18 @@ R.brief = (root, ctx) => {
     <label class="f">Gaya video</label><select name="gaya"><option value="">Pilih…</option>${['Narasi suara + grafik bergerak', 'Wawancara singkat + data', 'Drama pendek + data di akhir', 'Presentasi layar (screen recording) + narasi'].map(o => `<option>${o}</option>`).join('')}</select>
     <label class="f">Durasi</label><select name="durasi"><option value="">Pilih…</option><option>60 detik</option><option>75 detik</option><option>90 detik</option></select>
     <div class="grid g2"><div><label class="f">Penulis naskah</label><input type="text" name="t1"></div><div><label class="f">Pengisi suara</label><input type="text" name="t2"></div><div><label class="f">Editor video</label><input type="text" name="t3"></div><div><label class="f">Desain grafik</label><input type="text" name="t4"></div></div>
+    <h3 style="margin:16px 0 4px">Jadwal produksi</h3><div class="muted" style="font-size:13px">Isi tanggal target. Draf video paling lambat sehari sebelum Pertemuan 6.</div>
+    <div class="grid g3"><div><label class="f">Naskah &amp; audio selesai (P4)</label><input type="date" name="j1"></div><div><label class="f">Draf video diunggah (P5)</label><input type="date" name="j2"></div><div><label class="f">Video final (P6)</label><input type="date" name="j3"></div></div>
     <div class="q" style="margin-top:12px"><h3 style="margin-top:0">Komitmen etika</h3>${ETIKA.map((e, i) => `<label style="display:flex;gap:8px;margin:6px 0"><input type="checkbox" name="e${i}"> ${esc(e)}</label>`).join('')}</div>
     ${anggotaField()}`;
   bindDraft(root, ctx.key);
   const kb = kirimBar(root);
-  $('[data-kirim]', kb).onclick = () => { const f = ['judul', 'tujuan', 'aud', 'pesan', 'gaya', 'durasi', 't1', 't2', 't3', 't4'];
-    if (f.some(x => !val(root, x))) return alertBox('Belum lengkap', 'Isi semua bagian brief.');
+  $('[data-kirim]', kb).onclick = () => { const f = ['judul', 'tujuan', 'aud', 'pesan', 'gaya', 'durasi', 't1', 't2', 't3', 't4', 'j1', 'j2', 'j3'];
+    if (f.some(x => !val(root, x))) return alertBox('Belum lengkap', 'Isi semua bagian brief, termasuk jadwal produksi.');
+    if (!(val(root, 'j1') <= val(root, 'j2') && val(root, 'j2') <= val(root, 'j3'))) return alertBox('Jadwal belum urut', 'Tanggal harus berurutan: naskah & audio → draf video → video final.');
     if (ETIKA.some((_, i) => !$(`[name=e${i}]`, root).checked)) return alertBox('Komitmen etika', 'Centang keempat komitmen etika sebelum mengirim.');
     if (!cekAnggota(root)) return; const ag = ambilAnggota(root);
-    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${val(root, 'judul')} · ${val(root, 'aud')} · Pesan: ${val(root, 'pesan')} · ${val(root, 'gaya')}, ${val(root, 'durasi')}`, jawaban: { ...Object.fromEntries(f.map(x => [x, val(root, x)])), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${val(root, 'judul')} · ${val(root, 'aud')} · Pesan: ${val(root, 'pesan')} · ${val(root, 'gaya')}, ${val(root, 'durasi')} · Jadwal: ${val(root, 'j1')} / ${val(root, 'j2')} / ${val(root, 'j3')}`, jawaban: { ...Object.fromEntries(f.map(x => [x, val(root, x)])), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
 };
 
 /* ---- kegiatan Pertemuan 4–6 ---- */
