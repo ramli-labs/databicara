@@ -212,12 +212,16 @@ const PERTEMUAN = [
       { id: 'posttest', judul: 'Post-Test', jenis: 'individu', menit: 8, r: 'posttest2', desc: '5 soal pilihan ganda + 1 uraian singkat.' },
       { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
     ] },
-  { n: 3, judul: 'Data Menjadi Temuan', sub: 'Fungsi dasar, ringkasan, dan grafik', tp: 'Informatika BK.8.18',
-    tujuan: ['Membuat ringkasan data dengan SUM, AVERAGE, MAX, MIN, dan COUNTIF.', 'Menyusun tiga temuan data sebagai bahan cerita video.'],
+  { n: 3, judul: 'Data Menjadi Temuan', sub: 'Fungsi dasar, grafik, tiga temuan, dan brief video', tp: 'Informatika BK.8.18',
+    tujuan: ['Menerapkan fungsi SUM, AVERAGE, MAX, MIN, dan COUNTIF untuk meringkas data.', 'Menyajikan perbandingan data dalam grafik dan menafsirkannya.', 'Menyusun tiga temuan data (angka, makna, saran) dan brief video data.'],
     kegiatan: [
-      { id: 'fungsi', judul: 'Lab Fungsi', jenis: 'kelompok', desc: 'Ringkasan data kelas dengan fungsi dasar.' },
-      { id: 'temuan', judul: '3 Temuan Data', jenis: 'kelompok', desc: 'Angka + makna + saran untuk teman.' },
-      { id: 'brief', judul: 'Brief Video Data', jenis: 'kelompok', desc: 'Tujuan, audiens, pesan kunci, dan pembagian tugas.' },
+      { id: 'pretest', judul: 'Pre-Test', jenis: 'individu', menit: 5, r: 'pretest3', desc: '5 soal singkat sebelum mulai.' },
+      { id: 'fungsi', judul: 'Fungsi yang Tepat', jenis: 'individu', menit: 5, r: 'fungsi', desc: '6 situasi: fungsi mana yang dipakai?' },
+      { id: 'lab', judul: 'Lab Fungsi', jenis: 'kelompok', menit: 20, r: 'lab', desc: 'Ringkas data survei dengan SUM, AVERAGE, MAX, MIN, COUNTIF.' },
+      { id: 'grafik', judul: 'Grafik Pembanding', jenis: 'kelompok', menit: 15, r: 'grafik', desc: 'AVERAGEIF + Column Chart: tidur murid Layar > 4 vs ≤ 4.' },
+      { id: 'temuan', judul: '3 Temuan Data', jenis: 'kelompok', menit: 15, r: 'temuan', desc: 'Angka + makna + saran untuk teman.' },
+      { id: 'brief', judul: 'Brief Video Data', jenis: 'kelompok', menit: 20, r: 'brief', desc: 'Tujuan, penonton, pesan kunci, gaya, dan pembagian tugas.' },
+      { id: 'posttest', judul: 'Post-Test', jenis: 'individu', menit: 8, r: 'posttest3', desc: '5 soal pilihan ganda + 1 uraian singkat.' },
       { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
     ] },
   { n: 4, judul: 'Suara Data', sub: 'Prinsip produksi audio-video dan narasi', tp: 'KKA LD.8.1–8.2',
@@ -516,6 +520,31 @@ const POST2 = [
   { s: 'Filter Kelas = VIII-B dan Sarapan < 5 menampilkan…', o: ['Semua murid VIII-B', 'Semua murid yang Sarapan < 5', 'Murid VIII-B yang Sarapan kurang dari 5 hari', 'Murid VIII-B atau murid yang Sarapan < 5'], a: 2 },
   { s: 'Fitur agar Row Header tetap terlihat saat menggulir ke bawah adalah…', o: ['Wrap Text', 'Freeze Panes', 'Merge Cells', 'AutoFit'], a: 1 }];
 
+
+/* ---- data Pertemuan 3 ---- */
+const PRE3 = [['=AVERAGE(C2:C71) menghitung rata-rata nilai C2 sampai C71.', 'B', 'AVERAGE = jumlah ÷ banyak data pada Range.'],
+  ['=SUM(D2:D71) hanya menjumlahkan D2 dan D71.', 'S', 'Titik dua berarti Range: semua Cell dari D2 sampai D71.'],
+  ['COUNTIF menghitung banyaknya Cell yang memenuhi kriteria.', 'B', 'Contoh: =COUNTIF(D2:D71,">4").'],
+  ['MAX menampilkan nilai terkecil.', 'S', 'MAX = terbesar, MIN = terkecil.']];
+const FUNGSI = ['SUM', 'AVERAGE', 'MAX', 'MIN', 'COUNTIF', 'AVERAGEIF'];
+const FUNGSI_Q = [['Total menit olahraga seluruh murid dalam seminggu.', 0], ['Rata-rata gelas air per hari.', 1], ['Waktu Layar paling lama.', 2], ['Tidur paling sedikit.', 3], ['Banyak murid yang sarapan 7 hari.', 4], ['Rata-rata Tidur khusus murid yang Layar > 4 jam.', 5]];
+const LAB = [
+  { id: 'f1', s: 'Total Olahraga semua murid: <code>=SUM(F2:F71)</code>', k: 17190 },
+  { id: 'f2', s: 'Rata-rata Tidur: <code>=AVERAGE(C2:C71)</code> (2 angka desimal)', k: 7.74, tol: 0.01 },
+  { id: 'f3', s: 'Layar paling lama: <code>=MAX(D2:D71)</code>', k: 6 },
+  { id: 'f4', s: 'Tidur paling sedikit: <code>=MIN(C2:C71)</code>', k: 6 },
+  { id: 'f5', s: 'Banyak murid Layar &gt; 4: <code>=COUNTIF(D2:D71,"&gt;4")</code>', k: 18 },
+  { id: 'f6', s: 'Banyak murid sarapan 7 hari: buat sendiri dengan COUNTIF', k: 22 },
+  { id: 'f7', s: 'Banyak murid Tidur kurang dari 8 jam: buat sendiri', k: 33 }];
+const GRAF = [{ id: 'g1', s: 'Rata-rata Tidur murid Layar &gt; 4: <code>=AVERAGEIF(D2:D71,"&gt;4",C2:C71)</code>', k: 6.97, tol: 0.01 },
+  { id: 'g2', s: 'Rata-rata Tidur murid Layar ≤ 4: <code>=AVERAGEIF(D2:D71,"&lt;=4",C2:C71)</code>', k: 8.01, tol: 0.01 }];
+const POST3 = [
+  { s: 'Formula untuk rata-rata Air pada G2:G71 adalah…', o: ['=SUM(G2:G71)', '=AVERAGE(G2:G71)', '=AVERAGE(G2+G71)', '=COUNT(G2:G71)'], a: 1 },
+  { s: '<code>=COUNTIF(E2:E71,0)</code> menghasilkan…', o: ['Jumlah hari sarapan semua murid', 'Banyaknya murid yang tidak pernah sarapan', 'Nilai sarapan terkecil', 'Rata-rata sarapan'], a: 1 },
+  { s: '<code>=MAX(F2:F71)-MIN(F2:F71)</code> artinya…', o: ['Total olahraga', 'Selisih olahraga terbanyak dan tersedikit', 'Rata-rata olahraga', 'Banyak murid yang berolahraga'], a: 1 },
+  { s: 'Grafik paling tepat untuk membandingkan rata-rata Tidur dua kelompok murid adalah…', o: ['Pie Chart', 'Line Chart', 'Column Chart', 'Tanpa grafik'], a: 2 },
+  { s: 'Temuan data yang baik untuk video memuat…', o: ['Angka saja', 'Pendapat tanpa angka', 'Angka, maknanya, dan saran', 'Nama murid dengan kebiasaan paling buruk'], a: 2 }];
+
 /* ===================== KEGIATAN ===================== */
 const R = {};
 const angka = s => { const t = String(s).trim().replace(/\s/g, '').replace(',', '.'); return t === '' ? NaN : Number(t); };
@@ -772,6 +801,97 @@ R.posttest2 = (root, ctx) => {
   };
 };
 
+/* ---- kegiatan Pertemuan 3 ---- */
+function soalPG(root, ctx, Q, judul, maks, intro, uraian) {
+  root.innerHTML = `<div class="inst">${intro}</div>${Q.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${q.s}<div class="choice" style="margin-top:8px">${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}">${esc(o)}</label>`).join('')}</div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    ${uraian ? `<div class="q"><b>${Q.length + 1}.</b> ${uraian}<textarea name="u" style="margin-top:8px"></textarea></div>` : ''}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const a = Q.map((_, i) => ($(`[name=p${i}]:checked`, root) || {}).value);
+    if (a.some(x => x === undefined) || (uraian && !val(root, 'u'))) return alertBox('Belum lengkap', 'Jawab semua soal dulu.');
+    const skor = a.filter((x, i) => +x === Q[i].a).length;
+    doKirim(root, ctx, { skor, maks: Q.length, ringkasan: `${judul} ${skor}/${Q.length}${uraian ? ' · Uraian: ' + val(root, 'u') : ' · salah no. ' + (a.map((x, i) => +x === Q[i].a ? null : i + 1).filter(Boolean).join(', ') || '-')}`, jawaban: { pg: a.map(Number), uraian: uraian ? val(root, 'u') : undefined } }, () => {
+      Q.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (+a[i] === q.a ? '<span class="right">Tepat.</span> ' : `<span class="wrong">Belum tepat.</span> Jawaban: <b>${esc(q.o[q.a])}</b>. `) + (q.why ? esc(q.why) : ''); }); });
+  };
+}
+R.pretest3 = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Jawab sejujurnya. Ini untuk melihat titik awalmu, bukan nilai.</div>
+    ${PRE3.map((q, i) => `<div class="q"><b>${i + 1}.</b> <code style="background:none">${esc(q[0])}</code><div class="tf" style="margin-top:8px"><label><input type="radio" name="q${i}" value="B">Benar</label><label><input type="radio" name="q${i}" value="S">Salah</label></div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    <div class="q"><b>5.</b> Bagaimana membuktikan dengan angka bahwa murid yang lama menatap layar tidurnya lebih sedikit?<textarea name="q4" placeholder="Tulis singkat…"></textarea></div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    const ans = PRE3.map((_, i) => ($(`[name=q${i}]:checked`, root) || {}).value || '');
+    if (ans.some(a => !a) || !val(root, 'q4')) return alertBox('Belum lengkap', 'Jawab semua soal dulu, ya.');
+    const skor = ans.filter((a, i) => a === PRE3[i][1]).length;
+    doKirim(root, ctx, { skor, maks: 4, ringkasan: `B/S ${skor}/4 · ${val(root, 'q4')}`, jawaban: { bs: ans, q5: val(root, 'q4') } }, () => {
+      PRE3.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (ans[i] === q[1] ? '<span class="right">Tepat.</span> ' : '<span class="wrong">Belum tepat.</span> ') + esc(q[2]); }); });
+  };
+};
+R.fungsi = (root, ctx) => soalPG(root, ctx, FUNGSI_Q.map(q => ({ s: esc(q[0]), o: FUNGSI, a: q[1] })), 'Fungsi', 6, 'Pilih fungsi yang paling tepat untuk setiap kebutuhan.');
+R.posttest3 = (root, ctx) => soalPG(root, ctx, POST3, 'PG', 5, 'Kerjakan sendiri. Soal 1–5 dinilai otomatis; soal 6 dinilai guru.', 'Tulis satu temuan data dari data survei (angka + makna + saran), lalu sebutkan formula yang menghasilkan angkanya.');
+
+function labAngka(root, ctx, items, nama, intro, extra, wajib, ringkas) {
+  root.innerHTML = `<div class="inst">${intro}${dlBar('bersih')}<span class="muted" style="font-size:13px">Data: ID di Column A, Kelas B, Tidur C, Layar D, Sarapan E, Olahraga F, Air G (Row 2–71).</span></div>
+    <div class="q">${items.map(q => `<div class="row" style="margin:10px 0"><label style="flex:1;min-width:280px">${q.s}</label><input type="text" name="${q.id}" style="max-width:130px" autocomplete="off"><span data-ck="${q.id}" style="width:24px;font-weight:900"></span></div>`).join('')}
+    <div class="row"><button class="btn" data-cek>Periksa</button><span data-sk class="muted"></span></div></div>${extra}${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const cocok = (q, v) => Math.abs(angka(v) - q.k) <= (q.tol || 1e-6) + 1e-9;
+  $('[data-cek]', root).onclick = () => cekIsian(root, items, cocok);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    if (items.some(q => !val(root, q.id)) || wajib.some(w => !val(root, w))) return alertBox('Belum lengkap', 'Isi semua jawaban dan isian di bawahnya.');
+    const box = $('[name=sudah]', root); if (box && !box.checked) return alertBox('Belum lengkap', 'Centang tanda bahwa grafik sudah dibuat dan disimpan.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root); const skor = cekIsian(root, items, cocok);
+    const jw = Object.fromEntries([...items.map(q => q.id), ...wajib].map(k => [k, val(root, k)]));
+    doKirim(root, ctx, { skor, maks: items.length, anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${nama} ${skor}/${items.length} · ${items.map(q => q.id + '=' + val(root, q.id)).join(' ')} · ${wajib.map(w => val(root, w)).join(' · ')}`, jawaban: { ...jw, anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+}
+R.lab = (root, ctx) => labAngka(root, ctx, LAB, 'Lab Fungsi',
+  '<b>Tugas kelompok.</b> Buka data bersih. Ketik setiap formula di Cell kosong (misalnya Column J), lalu tulis hasilnya. Formula selalu diawali <b>=</b>; Range memakai titik dua; kriteria COUNTIF ditulis dalam tanda kutip, misalnya <code>"&gt;4"</code>. Jika Excel memakai pemisah titik koma, tulis <code>=COUNTIF(D2:D71;"&gt;4")</code>.',
+  '<label class="f">Formula yang kalian buat untuk nomor 6 dan 7</label><input type="text" name="rumus" placeholder="=COUNTIF(...) dan =COUNTIF(...)">', ['rumus']);
+R.grafik = (root, ctx) => labAngka(root, ctx, GRAF, 'Grafik',
+  '<b>Tugas kelompok.</b> <b>AVERAGEIF</b> menghitung rata-rata hanya untuk Row yang memenuhi kriteria. Buat tabel kecil dua Row (Layar &gt; 4 dan Layar ≤ 4) berisi hasilnya, blok tabel itu, lalu <b>Insert → Column Chart</b>. Beri judul grafik dan judul sumbu.',
+  `<label class="f">Judul grafik kalian</label><input type="text" name="judul" placeholder="Contoh: Murid yang lama menatap layar tidur ±1 jam lebih sedikit">
+   <label class="f">Apa yang ditunjukkan grafik? (sertakan selisihnya)</label><textarea name="tafsir"></textarea>
+   <label class="f">Apakah grafik ini membuktikan layar MENYEBABKAN tidur berkurang? Jelaskan.</label><textarea name="sebab"></textarea>
+   <label style="display:flex;gap:8px;margin-top:10px"><input type="checkbox" name="sudah"> Grafik sudah dibuat dan disimpan di file kelompok.</label>`, ['judul', 'tafsir', 'sebab']);
+
+R.temuan = (root, ctx) => {
+  root.innerHTML = `<div class="inst"><b>Tugas kelompok.</b> Temuan yang baik = <b>angka</b> (dari formula) + <b>makna</b> (artinya apa bagi kita) + <b>saran</b> (ajakan yang bisa dilakukan teman). Jangan menyebut atau menyindir murid tertentu.</div>
+    <div class="note">Contoh: <b>Angka:</b> 18 dari 70 murid (26%) Layar lebih dari 4 jam per hari. <b>Makna:</b> sekitar 1 dari 4 teman menghabiskan lebih dari 4 jam di depan layar untuk hiburan. <b>Saran:</b> matikan layar 1 jam sebelum tidur.</div>
+    ${[1, 2, 3].map(i => `<div class="q"><h3 style="margin-top:0">Temuan ${i}</h3><label class="f">Angka</label><input type="text" name="a${i}"><label class="f">Formula sumber angka</label><input type="text" name="r${i}" placeholder="=COUNTIF(...)"><label class="f">Makna</label><textarea name="m${i}"></textarea><label class="f">Saran untuk teman</label><input type="text" name="s${i}"></div>`).join('')}
+    <label class="f">Temuan mana yang paling kuat untuk pembuka video?</label><select name="kuat"><option value="">Pilih…</option><option>1</option><option>2</option><option>3</option></select>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const f = [1, 2, 3].flatMap(i => ['a', 'r', 'm', 's'].map(x => x + i)).concat('kuat');
+    if (f.some(x => !val(root, x))) return alertBox('Belum lengkap', 'Lengkapi ketiga temuan (angka, formula, makna, saran) dan pilih temuan terkuat.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root);
+    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: [1, 2, 3].map(i => `T${i}: ${val(root, 'a' + i)} → ${val(root, 's' + i)}`).join(' · ') + ` · Terkuat: ${val(root, 'kuat')}`, jawaban: { ...Object.fromEntries(f.map(x => [x, val(root, x)])), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
+R.brief = (root, ctx) => {
+  const ETIKA = ['Tidak menyebut, menampilkan, atau menyindir murid tertentu.', 'Semua angka berasal dari formula yang bisa dicek ulang.', 'Pesan mengajak, bukan menakut-nakuti atau mempermalukan.', 'Musik, gambar, dan suara bebas hak cipta atau buatan sendiri.'];
+  root.innerHTML = `<div class="hero" style="margin-bottom:14px"><div class="tag">Pertanyaan proyek</div><div class="pq">"${esc(PROYEK)}"</div></div>
+    <div class="inst"><b>Brief</b> adalah rencana singkat sebelum produksi, seperti peta sebelum perjalanan. Brief ini dipakai di Pertemuan 4–5.</div>
+    <label class="f">Judul video</label><input type="text" name="judul">
+    <label class="f">Tujuan video (setelah menonton, penonton akan…)</label><input type="text" name="tujuan">
+    <label class="f">Penonton utama</label><select name="aud"><option value="">Pilih…</option>${['Teman sekelas', 'Seluruh kelas VIII', 'Adik kelas VII', 'Orang tua', 'Warga sekolah (mading digital)'].map(o => `<option>${o}</option>`).join('')}</select>
+    <label class="f">Pesan kunci (satu kalimat yang harus diingat penonton)</label><input type="text" name="pesan">
+    <label class="f">Gaya video</label><select name="gaya"><option value="">Pilih…</option>${['Narasi suara + grafik bergerak', 'Wawancara singkat + data', 'Drama pendek + data di akhir', 'Presentasi layar (screen recording) + narasi'].map(o => `<option>${o}</option>`).join('')}</select>
+    <label class="f">Durasi</label><select name="durasi"><option value="">Pilih…</option><option>60 detik</option><option>75 detik</option><option>90 detik</option></select>
+    <div class="grid g2"><div><label class="f">Penulis naskah</label><input type="text" name="t1"></div><div><label class="f">Pengisi suara</label><input type="text" name="t2"></div><div><label class="f">Editor video</label><input type="text" name="t3"></div><div><label class="f">Desain grafik</label><input type="text" name="t4"></div></div>
+    <div class="q" style="margin-top:12px"><h3 style="margin-top:0">Komitmen etika</h3>${ETIKA.map((e, i) => `<label style="display:flex;gap:8px;margin:6px 0"><input type="checkbox" name="e${i}"> ${esc(e)}</label>`).join('')}</div>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const f = ['judul', 'tujuan', 'aud', 'pesan', 'gaya', 'durasi', 't1', 't2', 't3', 't4'];
+    if (f.some(x => !val(root, x))) return alertBox('Belum lengkap', 'Isi semua bagian brief.');
+    if (ETIKA.some((_, i) => !$(`[name=e${i}]`, root).checked)) return alertBox('Komitmen etika', 'Centang keempat komitmen etika sebelum mengirim.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root);
+    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${val(root, 'judul')} · ${val(root, 'aud')} · Pesan: ${val(root, 'pesan')} · ${val(root, 'gaya')}, ${val(root, 'durasi')}`, jawaban: { ...Object.fromEntries(f.map(x => [x, val(root, x)])), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
 R.tiket = (root, ctx) => {
   root.innerHTML = `<div class="inst">Tiket keluar membantu guru tahu apa yang sudah kamu pahami dan apa yang masih membingungkan.</div>
     <label class="f">3 hal baru yang kupelajari hari ini</label>${[1, 2, 3].map(i => `<input type="text" name="h${i}" style="margin-bottom:6px">`).join('')}
@@ -800,6 +920,13 @@ const KUNCI_GURU_INFO = {
   'P2-saring': 'Kunci: s1 18 · s2 30 · s3 10 · s4 4. Tercapai KKTP 3: ≥ 3/4. Kesalahan umum: memakai ≥ alih-alih >, atau lupa menghapus Filter sebelumnya.',
   'P2-proyek': 'Bagus bila: kriteria Sort/Filter jelas, hasil memuat angka, dan kesimpulan jujur (boleh "belum didukung").',
   'P2-posttest': 'Kunci PG: 1 Filter · 2 Di setiap kelas, Tidur terbanyak paling atas · 3 Dibaca sebagai teks · 4 Murid VIII-B yang Sarapan < 5 · 5 Freeze Panes. Nilai = PG × 12 + uraian (0–4) × 10.',
+  'P3-pretest': 'Kunci: 1 B, 2 S, 3 B, 4 S. Skor 0–2 → kartu sintaks fungsi + tutor sebaya; 4 + uraian menyebut rata-rata dua kelompok → tantangan AVERAGEIF dan COUNTIFS.',
+  'P3-fungsi': 'Kunci: 1 SUM · 2 AVERAGE · 3 MAX · 4 MIN · 5 COUNTIF · 6 AVERAGEIF.',
+  'P3-lab': 'Kunci: f1 17190 · f2 7,74 · f3 6 · f4 6 · f5 18 · f6 22 (=COUNTIF(E2:E71,7)) · f7 33 (=COUNTIF(C2:C71,"<8")). Tercapai KKTP 1: ≥ 5/7.',
+  'P3-grafik': 'Kunci: g1 6,97 · g2 8,01 (selisih ±1 jam). Jawaban "sebab" yang baik: grafik menunjukkan hubungan, belum membuktikan sebab-akibat. Tercapai KKTP 2: 2/2 + tafsir menyebut selisih.',
+  'P3-temuan': 'Bagus bila tiap temuan punya angka dari formula, makna yang tepat, saran yang bisa dilakukan, dan tidak menyudutkan orang.',
+  'P3-brief': 'Periksa: pesan kunci satu kalimat, penonton jelas, pembagian tugas merata, komitmen etika dicentang.',
+  'P3-posttest': 'Kunci PG: 1 =AVERAGE(G2:G71) · 2 Murid tidak pernah sarapan · 3 Selisih olahraga terbanyak dan tersedikit · 4 Column Chart · 5 Angka, makna, saran. Nilai = PG × 12 + uraian × 10.',
   'P1-survei': 'Data mentah untuk P2. Hapus Column Nama sebelum ditayangkan atau dibagikan.',
 };
 function viewGuru(app) {
