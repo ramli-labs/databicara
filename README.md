@@ -7,7 +7,7 @@ Web pembelajaran untuk Modul 3 gabungan Informatika (Lembar Kerja Pengolah Data,
 | Pertemuan | Fokus | TP |
 |---|---|---|
 | P1 | Sel, Alamat & Rumus | BK.8.13–8.14 |
-| P2 | Rapikan, Urutkan, Saring | BK.8.15–8.17 |
+| P2 | Rapikan, Sort & Filter | BK.8.15–8.17 |
 | P3 | Data Menjadi Temuan | BK.8.18 |
 | P4 | Suara Data | LD.8.1–8.2 |
 | P5 | Video Data | LD.8.3–8.5 |
@@ -19,6 +19,7 @@ Web pembelajaran untuk Modul 3 gabungan Informatika (Lembar Kerja Pengolah Data,
 |---|---|
 | `index.html` | Seluruh web (satu berkas). |
 | `data/Data_Kebiasaan_Kelas_8.xlsx` | Data **fiktif** 32 murid untuk Misi Data Kelas (P1). |
+| `data/Data_Survei_Kelas_8_Berantakan.xlsx`, `data/Data_Survei_Kelas_8_Bersih.xlsx` | Data survei **fiktif** 70 murid (ID, tanpa nama) untuk P2. |
 
 ## Penyimpanan jawaban
 

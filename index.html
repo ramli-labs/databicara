@@ -158,7 +158,7 @@ code{background:var(--mint);border-radius:5px;padding:1px 6px;font-family:Consol
   <a class="chip" href="#guru" style="text-decoration:none">Guru</a>
 </div></header>
 <main id="app"></main>
-<footer class="ft">DATA BICARA · dari cell ke cerita · Ramli Jainal Muttaqin, S.Pd. · SMP Labschool Jakarta</footer>
+<footer class="ft">DATA BICARA · dari Cell ke cerita · Ramli Jainal Muttaqin, S.Pd. · SMP Labschool Jakarta</footer>
 <div id="modalRoot"></div>
 
 <script>
@@ -200,12 +200,16 @@ const PERTEMUAN = [
       { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
       { id: 'survei', judul: 'Tugas Rumah: Survei Kebiasaanku', jenis: 'individu', menit: 0, r: 'survei', desc: 'Catat kebiasaanmu sendiri. Data kelas dipakai di Pertemuan 2 tanpa nama.' },
     ] },
-  { n: 2, judul: 'Rapikan, Urutkan, Saring', sub: 'Operasi dasar, sorting, dan filtering data kelas', tp: 'Informatika BK.8.15–8.17',
-    tujuan: ['Melakukan operasi dasar worksheet: membuka, menyunting, menyimpan, dan memformat.', 'Mengurutkan data berdasarkan satu atau lebih column.', 'Menyaring data berdasarkan kriteria tertentu.'],
+  { n: 2, judul: 'Rapikan, Sort & Filter', sub: 'Operasi dasar worksheet, Sort, dan Filter data survei kelas', tp: 'Informatika BK.8.15–8.17',
+    tujuan: ['Melakukan operasi dasar worksheet: membuka, menyunting, menyimpan, dan memformat data.', 'Mengurutkan data (Sort) berdasarkan satu atau lebih Column.', 'Menyaring data (Filter) berdasarkan satu atau lebih kriteria.'],
     kegiatan: [
-      { id: 'rapi', judul: 'Bengkel Data Berantakan', jenis: 'kelompok', desc: 'Merapikan data survei kelas: format angka, judul, dan lebar column.' },
-      { id: 'urut', judul: 'Urutkan & Temukan', jenis: 'kelompok', desc: 'Siapa paling lama tidur? Urutkan satu dan dua column.' },
-      { id: 'saring', judul: 'Saring Kriteria', jenis: 'kelompok', desc: 'Filter: layar > 4 jam, sarapan < 5 hari, dan kombinasinya.' },
+      { id: 'pretest', judul: 'Pre-Test', jenis: 'individu', menit: 5, r: 'pretest2', desc: '5 soal singkat sebelum mulai.' },
+      { id: 'rapi', judul: 'Bengkel Data Berantakan', jenis: 'kelompok', menit: 25, r: 'rapi', desc: 'Rapikan data survei: judul, Header, duplikat, angka bersatuan, nama kelas, format.' },
+      { id: 'pilih', judul: 'Sort atau Filter?', jenis: 'individu', menit: 6, r: 'pilih', desc: '6 situasi: alat mana yang tepat?' },
+      { id: 'urut', judul: 'Sort & Temukan', jenis: 'kelompok', menit: 15, r: 'urut', desc: 'Urutkan satu dan dua Column untuk menemukan jawaban.' },
+      { id: 'saring', judul: 'Filter Kriteria', jenis: 'kelompok', menit: 15, r: 'saring', desc: 'Hitung baris yang lolos satu dan dua kriteria.' },
+      { id: 'proyek', judul: 'Data untuk Pertanyaan Kami', jenis: 'kelompok', menit: 8, r: 'proyek2', desc: 'Pakai Sort/Filter untuk menguji dugaan proyek kalian.' },
+      { id: 'posttest', judul: 'Post-Test', jenis: 'individu', menit: 8, r: 'posttest2', desc: '5 soal pilihan ganda + 1 uraian singkat.' },
       { id: 'tiket', judul: 'Tiket Keluar 3-2-1', jenis: 'individu', menit: 4, r: 'tiket', desc: '3 hal baru, 2 tindakan, 1 pertanyaan.' },
     ] },
   { n: 3, judul: 'Data Menjadi Temuan', sub: 'Fungsi dasar, ringkasan, dan grafik', tp: 'Informatika BK.8.18',
@@ -473,6 +477,45 @@ function ambilAnggota(root) {
 }
 function cekAnggota(root) { if ($('input[name=agt]', root) && !$$('input[name=agt]:checked', root).length) { alertBox('Anggota belum dipilih', 'Centang nama teman sekelompokmu dulu, supaya mereka ikut tercatat.'); return false; } return true; }
 
+
+/* ---- data Pertemuan 2 ---- */
+const FILE_P2_KOTOR = 'data/Data_Survei_Kelas_8_Berantakan.xlsx', FILE_P2_BERSIH = 'data/Data_Survei_Kelas_8_Bersih.xlsx';
+const PRE2 = [['Sort mengubah urutan baris data.', 'B', 'Sort menyusun ulang baris berdasarkan nilai Column yang dipilih.'],
+  ['Filter menghapus baris yang tidak memenuhi kriteria.', 'S', 'Filter hanya menyembunyikan; baris muncul lagi saat Filter dihapus.'],
+  ['Mengurutkan satu Column saja tanpa Column lain bisa membuat data tidak sesuai lagi.', 'B', 'Nilai pindah, tetapi ID dan kelasnya tidak ikut pindah.'],
+  ['Teks "8 jam" di sebuah Cell dapat langsung dihitung sebagai angka.', 'S', 'Karena ada kata "jam", isinya dibaca sebagai teks.']];
+const RAPI = [
+  ['Hapus 2 Row judul di atas sehingga Header berada di Row 1.', 'Klik kanan nomor Row → Delete row.'],
+  ['Seragamkan nama Header: ID, Kelas, Tidur, Layar, Sarapan, Olahraga, Air.', 'Klik Cell Header lalu ketik ulang.'],
+  ['Hapus Row ganda (duplikat).', 'Excel: Data → Remove Duplicates. Sheets: Data → Data cleanup → Remove duplicates.'],
+  ['Ubah isi Tidur yang masih bertuliskan "jam" menjadi angka saja.', 'Ctrl+F cari "jam", lalu perbaiki Cell-nya.'],
+  ['Seragamkan penulisan kelas VIII-B (ada yang ditulis viii-b, 8B, VIII B).', 'Filter Column Kelas untuk melihat semua variasi.'],
+  ['Format: Header tebal, lebar Column pas, Freeze Panes Row 1, lalu Save As Data_Bersih_Kelompok_N.xlsx.', 'View → Freeze Panes → Freeze Top Row.']];
+const CEK_RAPI = [['r1', 'Jumlah Row data setelah duplikat dihapus (tanpa Header)', 70], ['r2', 'Jumlah murid kelas VIII-B setelah penulisan kelas diseragamkan', 10], ['r3', 'Nilai Tidur untuk ID R037 setelah diperbaiki', 8]];
+const PILIH = [
+  { s: 'Mencari 5 murid dengan waktu Layar paling lama.', o: ['Sort', 'Filter', 'Keduanya'], a: 0, why: 'Urutkan Layar dari terbesar (Z→A), lalu lihat 5 Row teratas.' },
+  { s: 'Menampilkan hanya murid kelas VIII-D.', o: ['Sort', 'Filter', 'Keduanya'], a: 1, why: 'Filter Column Kelas = VIII-D; Row lain disembunyikan.' },
+  { s: 'Menyusun daftar dari Tidur paling sedikit ke paling banyak.', o: ['Sort', 'Filter', 'Keduanya'], a: 0, why: 'Sort Tidur A→Z (terkecil ke terbesar).' },
+  { s: 'Menghitung berapa murid yang tidak pernah sarapan (Sarapan = 0).', o: ['Sort', 'Filter', 'Keduanya'], a: 1, why: 'Filter Sarapan = 0, lalu lihat jumlah Row di Status Bar.' },
+  { s: 'Melihat hanya murid dengan Layar > 4 jam, diurutkan dari yang paling lama.', o: ['Sort', 'Filter', 'Keduanya'], a: 2, why: 'Filter dulu (Layar > 4), lalu Sort Layar Z→A.' },
+  { s: 'Raka hanya memilih Column Layar lalu menekan Sort A→Z, dan memilih "Continue with the current selection". Akibatnya…', o: ['Data tetap aman', 'Nilai Layar tidak lagi sesuai dengan ID dan kelasnya', 'Excel menghapus Column lain', 'Filter aktif otomatis'], a: 1, why: 'Hanya Column Layar yang berpindah. Pilih "Expand the selection" atau klik satu Cell di dalam tabel sebelum Sort.' }];
+const URUT = [
+  { id: 'u1', s: 'Sort Layar dari terbesar (Z→A). ID murid dengan Layar paling lama?', k: 'R064', t: 'id' },
+  { id: 'u2', s: 'Sort Tidur dari terkecil (A→Z). ID murid dengan Tidur paling sedikit?', k: 'R020', t: 'id' },
+  { id: 'u3', s: 'Custom Sort dua tingkat: Kelas A→Z, lalu Olahraga Z→A. ID murid teratas di kelas VIII-C?', k: 'R005', t: 'id' },
+  { id: 'u4', s: 'Setelah Sort Layar Z→A, berapa nilai Layar di urutan ke-10?', k: 5, t: 'n' }];
+const SARING = [
+  { id: 's1', s: 'Filter Layar > 4. Berapa Row yang tampil?', k: 18 },
+  { id: 's2', s: 'Hapus Filter tadi. Filter Sarapan < 5. Berapa Row yang tampil?', k: 30 },
+  { id: 's3', s: 'Dua kriteria: Layar > 4 DAN Sarapan < 5. Berapa Row?', k: 10 },
+  { id: 's4', s: 'Dua kriteria: Kelas = VIII-B DAN Olahraga ≥ 300. Berapa Row?', k: 4 }];
+const POST2 = [
+  { s: 'Untuk menampilkan hanya murid dengan Layar > 4 jam tanpa menghapus data lain, gunakan…', o: ['Sort', 'Filter', 'Delete row', 'Freeze Panes'], a: 1 },
+  { s: 'Data diurutkan Kelas A→Z, lalu Tidur Z→A. Artinya…', o: ['Semua murid diurutkan menurut Tidur saja', 'Di setiap kelas, murid dengan Tidur terbanyak berada paling atas', 'Kelas diurutkan Z→A', 'Data Tidur disembunyikan'], a: 1 },
+  { s: 'Cell berisi "8 jam" bermasalah karena…', o: ['Terlalu panjang', 'Dibaca sebagai teks sehingga tidak dihitung dan diurutkan sebagai angka', 'Huruf kecil', 'Tidak bisa diberi warna'], a: 1 },
+  { s: 'Filter Kelas = VIII-B dan Sarapan < 5 menampilkan…', o: ['Semua murid VIII-B', 'Semua murid yang Sarapan < 5', 'Murid VIII-B yang Sarapan kurang dari 5 hari', 'Murid VIII-B atau murid yang Sarapan < 5'], a: 2 },
+  { s: 'Fitur agar Row Header tetap terlihat saat menggulir ke bawah adalah…', o: ['Wrap Text', 'Freeze Panes', 'Merge Cells', 'AutoFit'], a: 1 }];
+
 /* ===================== KEGIATAN ===================== */
 const R = {};
 const angka = s => { const t = String(s).trim().replace(/\s/g, '').replace(',', '.'); return t === '' ? NaN : Number(t); };
@@ -626,6 +669,109 @@ R.survei = (root, ctx) => {
     doKirim(root, ctx, { skor: '', maks: '', ringkasan: `Tidur ${v.tidur} · Layar ${v.layar} · Sarapan ${v.sarapan} · Olahraga ${v.olahraga} · Air ${v.air}`, jawaban: v }); };
 };
 
+/* ---- kegiatan Pertemuan 2 ---- */
+const cocokId = (v, k) => String(v).toUpperCase().replace(/\s/g, '') === k;
+const dlBar = (both) => `<div class="row" style="margin:6px 0 10px">${both !== 'bersih' ? `<a class="btn sm" href="${FILE_P2_KOTOR}" download>Unduh data berantakan</a>` : ''}${both !== 'kotor' ? `<a class="btn sm ghost" href="${FILE_P2_BERSIH}" download>Unduh data bersih</a>` : ''}</div>`;
+function cekIsian(root, items, cocok) {
+  let s = 0; items.forEach(q => { const v = val(root, q.id); const ok = !!v && cocok(q, v); s += ok; $(`[data-ck="${q.id}"]`, root).innerHTML = v ? (ok ? '<span class="right">&#10003;</span>' : '<span class="wrong">&#10007;</span>') : ''; });
+  $('[data-sk]', root).innerHTML = `<b>${s}/${items.length} tepat.</b> ${s < items.length ? 'Periksa lagi di worksheet kalian.' : 'Mantap!'}`; return s;
+}
+const isianHTML = items => items.map(q => `<div class="row" style="margin:10px 0"><label style="flex:1;min-width:260px">${q.s}</label><input type="text" name="${q.id}" style="max-width:160px;text-transform:uppercase" autocomplete="off"><span data-ck="${q.id}" style="width:24px;font-weight:900"></span></div>`).join('');
+
+R.pretest2 = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Jawab sejujurnya. Ini untuk melihat titik awalmu, bukan nilai.</div>
+    ${PRE2.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${esc(q[0])}<div class="tf" style="margin-top:8px"><label><input type="radio" name="q${i}" value="B">Benar</label><label><input type="radio" name="q${i}" value="S">Salah</label></div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    <div class="q"><b>5.</b> Kamu ingin tahu murid mana saja yang tidurnya kurang dari 8 jam. Apa yang akan kamu lakukan di spreadsheet?<textarea name="q4" placeholder="Tulis singkat…"></textarea></div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    const ans = PRE2.map((_, i) => ($(`[name=q${i}]:checked`, root) || {}).value || '');
+    if (ans.some(a => !a) || !val(root, 'q4')) return alertBox('Belum lengkap', 'Jawab semua soal dulu, ya.');
+    const skor = ans.filter((a, i) => a === PRE2[i][1]).length;
+    doKirim(root, ctx, { skor, maks: 4, ringkasan: `B/S ${skor}/4 · ${val(root, 'q4')}`, jawaban: { bs: ans, q5: val(root, 'q4') } }, () => {
+      PRE2.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (ans[i] === q[1] ? '<span class="right">Tepat.</span> ' : '<span class="wrong">Belum tepat.</span> ') + esc(q[2]); }); });
+  };
+};
+
+R.rapi = (root, ctx) => {
+  const items = CEK_RAPI.map(c => ({ id: c[0], s: esc(c[1]), k: c[2] }));
+  root.innerHTML = `<div class="inst"><b>Tugas kelompok.</b> Data survei 70 murid kelas VIII (fiktif, tanpa nama) masih berantakan. Rapikan dulu sebelum di-Sort dan di-Filter.${dlBar('kotor')}</div>
+    <div class="q"><h3 style="margin-top:0">Daftar perbaikan</h3>${RAPI.map((r, i) => `<label class="chk" style="display:flex;gap:10px;align-items:flex-start;margin:8px 0"><input type="checkbox" name="c${i}" style="margin-top:4px"><span><b>${i + 1}.</b> ${esc(r[0])}<br><span class="muted" style="font-size:13px">Tips: ${esc(r[1])}</span></span></label>`).join('')}</div>
+    <div class="q"><h3 style="margin-top:0">Cek hasil</h3>${isianHTML(items)}<div class="row"><button class="btn" data-cek>Periksa</button><span data-sk class="muted"></span></div></div>
+    <label class="f">Masalah paling sulit diperbaiki dan cara kalian mengatasinya</label><textarea name="sulit"></textarea>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const cocok = (q, v) => Math.abs(angka(v) - q.k) < 1e-6;
+  $('[data-cek]', root).onclick = () => cekIsian(root, items, cocok);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    if (items.some(q => !val(root, q.id)) || !val(root, 'sulit')) return alertBox('Belum lengkap', 'Isi semua Cek hasil dan masalah paling sulit.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root); const skor = cekIsian(root, items, cocok);
+    const cek = RAPI.map((_, i) => $(`[name=c${i}]`, root).checked ? 1 : 0);
+    doKirim(root, ctx, { skor, maks: items.length, anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `Cek ${skor}/${items.length} · Perbaikan ${cek.reduce((a, b) => a + b, 0)}/6 · Sulit: ${val(root, 'sulit')}`, jawaban: { ...Object.fromEntries(items.map(q => [q.id, val(root, q.id)])), checklist: cek, sulit: val(root, 'sulit'), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
+R.pilih = (root, ctx) => {
+  root.innerHTML = `<div class="inst"><b>Sort</b> mengubah urutan Row. <b>Filter</b> menyembunyikan Row yang tidak memenuhi kriteria. Untuk setiap situasi, pilih alat yang tepat.</div>
+    ${PILIH.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${esc(q.s)}<div class="choice" style="margin-top:8px">${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}">${esc(o)}</label>`).join('')}</div><div class="fbk" data-fb="${i}"></div></div>`).join('')}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const a = PILIH.map((_, i) => ($(`[name=p${i}]:checked`, root) || {}).value);
+    if (a.some(x => x === undefined)) return alertBox('Belum lengkap', 'Jawab keenam situasi dulu.');
+    const skor = a.filter((x, i) => +x === PILIH[i].a).length;
+    doKirim(root, ctx, { skor, maks: PILIH.length, ringkasan: `Sort/Filter ${skor}/${PILIH.length} · salah no. ${a.map((x, i) => +x === PILIH[i].a ? null : i + 1).filter(Boolean).join(', ') || '-'}`, jawaban: { ans: a.map(Number) } }, () => {
+      PILIH.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = (+a[i] === q.a ? '<span class="right">Tepat.</span> ' : `<span class="wrong">Belum tepat.</span> Jawaban: <b>${esc(q.o[q.a])}</b>. `) + esc(q.why); }); });
+  };
+};
+
+function cekKelompok(root, ctx, items, cocok, nama, intro) {
+  root.innerHTML = `<div class="inst">${intro}${dlBar('bersih')}<span class="muted" style="font-size:13px">Pakai data bersih hasil Bengkel kalian. Jika belum selesai, unduh data bersih di atas.</span></div>
+    <div class="q">${isianHTML(items)}<div class="row"><button class="btn" data-cek>Periksa</button><span data-sk class="muted"></span></div></div>
+    <label class="f">Langkah yang kalian lakukan untuk soal terakhir (menu yang diklik)</label><textarea name="langkah"></textarea>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  $('[data-cek]', root).onclick = () => cekIsian(root, items, cocok);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => {
+    if (items.some(q => !val(root, q.id)) || !val(root, 'langkah')) return alertBox('Belum lengkap', 'Isi semua jawaban dan langkah kalian.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root); const skor = cekIsian(root, items, cocok);
+    doKirim(root, ctx, { skor, maks: items.length, anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${nama} ${skor}/${items.length} · ${items.map(q => q.id + '=' + val(root, q.id)).join(' ')} · Langkah: ${val(root, 'langkah')}`, jawaban: { ...Object.fromEntries(items.map(q => [q.id, val(root, q.id)])), langkah: val(root, 'langkah'), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+}
+R.urut = (root, ctx) => cekKelompok(root, ctx, URUT, (q, v) => q.t === 'id' ? cocokId(v, q.k) : Math.abs(angka(v) - q.k) < 1e-6, 'Sort',
+  '<b>Tugas kelompok.</b> Klik satu Cell di dalam tabel, lalu Data → Sort (atau Sort range / Custom Sort). Pastikan "My data has headers" dicentang.');
+R.saring = (root, ctx) => cekKelompok(root, ctx, SARING, (q, v) => Math.abs(angka(v) - q.k) < 1e-6, 'Filter',
+  '<b>Tugas kelompok.</b> Klik satu Cell di Header, lalu Data → Filter (Ctrl+Shift+L). Gunakan Number Filters untuk &gt; atau &lt;. Jumlah Row yang tampil terlihat di Status Bar ("x of 70 records found").');
+
+R.proyek2 = (root, ctx) => {
+  root.innerHTML = `<div class="hero" style="margin-bottom:14px"><div class="tag">Pertanyaan proyek</div><div class="pq">"${esc(PROYEK)}"</div></div>
+    <div class="inst">Ingat pertanyaan yang kalian pilih di Pertemuan 1. Uji dugaan kalian dengan Sort dan Filter pada data bersih.${dlBar('bersih')}</div>
+    <label class="f">Pertanyaan kami</label><input type="text" name="tanya">
+    <label class="f">Sort/Filter yang kami pakai (sebutkan Column dan kriterianya)</label><textarea name="alat" placeholder="Contoh: Filter Layar > 4, lalu Sort Tidur A→Z"></textarea>
+    <label class="f">Hasil yang kami temukan (sertakan angka)</label><textarea name="hasil" placeholder="Contoh: 18 dari 70 murid Layar > 4 jam; 12 di antaranya Tidur < 8 jam"></textarea>
+    <label class="f">Apakah dugaan awal kami didukung data?</label><select name="dukung"><option value="">Pilih…</option><option>Ya</option><option>Sebagian</option><option>Belum/tidak</option><option>Belum bisa dijawab dengan Sort/Filter saja</option></select>
+    ${anggotaField()}`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const f = ['tanya', 'alat', 'hasil', 'dukung'];
+    if (f.some(x => !val(root, x))) return alertBox('Belum lengkap', 'Isi semua isian.');
+    if (!cekAnggota(root)) return; const ag = ambilAnggota(root);
+    doKirim(root, ctx, { skor: '', maks: '', anggota: ag.anggota, kelompok: ag.kelompok, ringkasan: `${val(root, 'tanya')} · Alat: ${val(root, 'alat')} · Hasil: ${val(root, 'hasil')} · Didukung: ${val(root, 'dukung')}`, jawaban: { ...Object.fromEntries(f.map(x => [x, val(root, x)])), anggota: ag.namaAnggota, kelompok: ag.kelompok } }); };
+};
+
+R.posttest2 = (root, ctx) => {
+  root.innerHTML = `<div class="inst">Kerjakan sendiri. Soal 1–5 dinilai otomatis; soal 6 dinilai guru.</div>
+    ${POST2.map((q, i) => `<div class="q"><b>${i + 1}.</b> ${q.s}<div class="choice" style="margin-top:8px">${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}">${esc(o)}</label>`).join('')}</div><div class="fbk" data-fb="${i}"></div></div>`).join('')}
+    <div class="q"><b>6.</b> Mengapa data harus dirapikan sebelum di-Sort dan di-Filter? Beri satu contoh dari Bengkel Data Berantakan.<textarea name="u" style="margin-top:8px"></textarea></div>`;
+  bindDraft(root, ctx.key);
+  const kb = kirimBar(root);
+  $('[data-kirim]', kb).onclick = () => { const a = POST2.map((_, i) => ($(`[name=p${i}]:checked`, root) || {}).value);
+    if (a.some(x => x === undefined) || !val(root, 'u')) return alertBox('Belum lengkap', 'Jawab keenam soal dulu.');
+    const skor = a.filter((x, i) => +x === POST2[i].a).length;
+    doKirim(root, ctx, { skor, maks: 5, ringkasan: `PG ${skor}/5 · Uraian: ${val(root, 'u')}`, jawaban: { pg: a.map(Number), uraian: val(root, 'u') } }, () => {
+      POST2.forEach((q, i) => { $(`[data-fb="${i}"]`, root).innerHTML = +a[i] === q.a ? '<span class="right">Tepat.</span>' : `<span class="wrong">Belum tepat.</span> Jawaban: ${esc(q.o[q.a])}`; }); });
+  };
+};
+
 R.tiket = (root, ctx) => {
   root.innerHTML = `<div class="inst">Tiket keluar membantu guru tahu apa yang sudah kamu pahami dan apa yang masih membingungkan.</div>
     <label class="f">3 hal baru yang kupelajari hari ini</label>${[1, 2, 3].map(i => `<input type="text" name="h${i}" style="margin-bottom:6px">`).join('')}
@@ -635,7 +781,7 @@ R.tiket = (root, ctx) => {
   bindDraft(root, ctx.key);
   const kb = kirimBar(root);
   $('[data-kirim]', kb).onclick = () => { const h = [1, 2, 3].map(i => val(root, 'h' + i)), t = [1, 2].map(i => val(root, 't' + i)), q = val(root, 'q1'), r = ($('[name=rasa]:checked', root) || {}).value;
-    if (h.some(x => !x) || t.some(x => !x) || !q || !r) return alertBox('Belum lengkap', 'Isi semua column tiket keluar.');
+    if (h.some(x => !x) || t.some(x => !x) || !q || !r) return alertBox('Belum lengkap', 'Isi semua isian tiket keluar.');
     doKirim(root, ctx, { skor: +r, maks: 4, ringkasan: `Pemahaman ${r}/4 · Baru: ${h.join('; ')} · Tindakan: ${t.join('; ')} · Tanya: ${q}`, jawaban: { baru: h, tindakan: t, tanya: q, rasa: +r } }); };
 };
 
@@ -647,7 +793,14 @@ const KUNCI_GURU_INFO = {
   'P1-misi': 'Kunci: H8 = 28 · H21 = 7 · I13 = -2 · I26 = -1,5 · K10 = =D10-$M$3 · K14 = 4 · J3 = 5,5 (salah karena M3 = batas layar). Tercapai KKTP 3: ≥ 5/7 dan alasan $ benar.',
   'P1-tanya': 'Pertanyaan yang baik dapat dijawab dengan data yang ada (column tidur, layar, sarapan, olahraga, air) dan relevan dengan penonton.',
   'P1-posttest': 'Kunci PG: 1 F12 · 2 32 cell · 3 =B6*C6 · 4 =D9*$H$1 · 5 =C2-$M$2. Skor otomatis = jumlah PG benar (0–5). Uraian dinilai 0–4 (Absolute dipakai saat formula merujuk satu cell tetap seperti target/batas). Nilai = PG × 12 + uraian × 10 (maks 100).',
-  'P1-survei': 'Data mentah untuk P2. Hapus column nama sebelum ditayangkan atau dibagikan.',
+  'P2-pretest': 'Kunci: 1 B, 2 S, 3 B, 4 S. Skor 0–2 → kartu bantuan Sort/Filter + tutor sebaya; 4 + uraian menyebut Filter → tantangan Custom Sort dan Number Filter.',
+  'P2-rapi': 'Kunci: 70 Row · VIII-B = 10 murid · Tidur R037 = 8. Tercapai KKTP 1: 3/3 dan minimal 5/6 perbaikan dicentang. Duplikat: 4 Row; teks "jam": R014, R037, R058; kelas tidak seragam: R003, R016, R020.',
+  'P2-pilih': 'Kunci: 1 Sort · 2 Filter · 3 Sort · 4 Filter · 5 Keduanya · 6 Nilai Layar tidak lagi sesuai dengan ID dan kelasnya.',
+  'P2-urut': 'Kunci: u1 R064 · u2 R020 · u3 R005 · u4 5. Tercapai KKTP 2: ≥ 3/4.',
+  'P2-saring': 'Kunci: s1 18 · s2 30 · s3 10 · s4 4. Tercapai KKTP 3: ≥ 3/4. Kesalahan umum: memakai ≥ alih-alih >, atau lupa menghapus Filter sebelumnya.',
+  'P2-proyek': 'Bagus bila: kriteria Sort/Filter jelas, hasil memuat angka, dan kesimpulan jujur (boleh "belum didukung").',
+  'P2-posttest': 'Kunci PG: 1 Filter · 2 Di setiap kelas, Tidur terbanyak paling atas · 3 Dibaca sebagai teks · 4 Murid VIII-B yang Sarapan < 5 · 5 Freeze Panes. Nilai = PG × 12 + uraian (0–4) × 10.',
+  'P1-survei': 'Data mentah untuk P2. Hapus Column Nama sebelum ditayangkan atau dibagikan.',
 };
 function viewGuru(app) {
   const g = { url: scriptURL(), kunci: store.get('guru.kunci', ''), kelas: store.get('guru.kelas', ''), p: store.get('guru.p', '1'), k: store.get('guru.k', 'peta') };
@@ -691,8 +844,18 @@ function viewGuru(app) {
       <div class="card"><div class="stat">${sk.length ? (sk.reduce((a, b) => a + b, 0) / sk.length).toFixed(1) : '–'}${maks ? `<span style="font-size:20px">/${esc(maks)}</span>` : ''}</div><div class="muted">rerata skor</div></div>
       ${zona ? `<div class="card">${zona.map(([z, c]) => `<div class="row" style="justify-content:space-between"><b>${z}</b><span class="stat" style="font-size:26px">${c}</span></div>`).join('')}</div>` : ''}</div>
       ${kelas && murid.length ? `<h2>Belum mengerjakan (${belum.length})</h2><div class="card">${belum.length ? belum.map(m => `${esc(m.absen)}. ${esc(m.nama)}`).join(' · ') : '<span class="right">Semua murid sudah tercatat.</span>'}</div>` : (url && !kelas ? '<div class="note">Pilih satu kelas untuk melihat daftar murid yang belum mengerjakan.</div>' : '')}
+      ${k === 'survei' && p === '1' && rows.length ? `<div class="note"><b>Data survei untuk Pertemuan 2.</b> Unduh tanpa nama dan absen (urutan diacak), lalu bagikan ke murid. <button class="btn sm" type="button" id="gCsv">Unduh CSV tanpa nama</button></div>` : ''}
       <h2>Rincian</h2><div class="tw"><table><thead><tr><th>Kelas</th><th>Absen</th><th>Nama</th><th>Klp</th><th>Skor</th><th>Ringkasan jawaban</th><th>Dikirim oleh</th><th>Waktu</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td>${esc(r.kelas)}</td><td>${esc(r.absen)}</td><td>${esc(r.nama)}</td><td>${esc(r.kelompok)}</td><td>${esc(r.skor)}${r.maks ? '/' + esc(r.maks) : ''}</td><td>${esc(r.ringkasan)}</td><td>${r.oleh && r.oleh !== r.nama ? esc(r.oleh) : ''}</td><td style="white-space:nowrap">${esc(new Date(r.waktu).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }))}</td></tr>`).join('') || '<tr><td colspan="8" class="muted">Belum ada kiriman.</td></tr>'}</tbody></table></div>`;
+    const bCsv = $('#gCsv'); if (bCsv) bCsv.onclick = () => {
+      const ambil = r => { let j = r.jawaban; try { if (typeof j === 'string') j = JSON.parse(j); } catch (e) { j = null; }
+        if (j && j.tidur !== undefined) return [j.tidur, j.layar, j.sarapan, j.olahraga, j.air];
+        const m = String(r.ringkasan).match(/Tidur ([\d.]+) · Layar ([\d.]+) · Sarapan ([\d.]+) · Olahraga ([\d.]+) · Air ([\d.]+)/); return m ? m.slice(1).map(Number) : null; };
+      const data = rows.map(r => [r.kelas, ...(ambil(r) || [])]).filter(x => x.length === 6);
+      for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [data[i], data[j]] = [data[j], data[i]]; }
+      const csv = ['ID,Kelas,Tidur,Layar,Sarapan,Olahraga,Air', ...data.map((d, i) => ['S' + String(i + 1).padStart(3, '0'), ...d].join(','))].join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = `Survei_${kelas || 'Semua'}_tanpa_nama.csv`; a.click();
+    };
   };
 }
 
